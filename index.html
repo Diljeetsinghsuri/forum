@@ -6,19 +6,64 @@
 <title>login</title>
 <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
 <link rel="stylesheet" href="css/test.css" />
-
 <script src="lib/jquery/dist/jquery.min.js"></script>
 <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
 <script src="lib/angular/angular.js"></script>
 <script src="lib/angular-route/angular-route.js"></script>
-<script src="lib/ui.bootstrap/index.js"></script>
+<script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="js/app.js"></script>
 
 </head>
 
 <body style="background-color:#CCCCCC">
-
+<div class="container">
+    <nav class="navbar navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle"  data-toggle="dropdown">Common
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Maths</a></li>
+                        <li><a href="#">Aptitude</a></li>
+                        <li><a href="#">DE</a></li>
+                        <li><a href="#">Control System</a></li>
+                        <li><a href="#">Network</a></li>
+                        <li><a href="#">Signal & System</a></li>
+                        <li><a href="#">Analogy</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class=" dropdown-toggle" data-toggle="dropdown">ECE
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">EMFT</a></li>
+                        <li><a href="#">EDC</a></li>
+                        <li><a href="#">Communication</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class=" dropdown-toggle"  data-toggle="dropdown">EE
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Machine</a></li>
+                        <li><a href="#">Measurement & Instrument</a></li>
+                        <li><a href="#">Power Electronics</a></li>
+                        <li><a href="#">Power System</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
 <ng-view></ng-view>
-
+</div>
 </body>
 </html>

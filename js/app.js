@@ -22,11 +22,12 @@ angular.module("forum",["ngRoute","ui.bootstrap"])
 
     .controller("loginCtrl",loginCtrl)
     .controller("homeCtrl",homeCtrl)
+    .controller("popupCtrl",popupCtrl)
 
 
 
 
-function loginCtrl($location){
+function loginCtrl($location,$uibModal){
     
     var login = this;
 
@@ -36,7 +37,22 @@ function loginCtrl($location){
             $location.path("/home")
             
         }
-    
+    login.animationsEnabled = true;
+    login.open = function (parentSelector) {
+        var modalInstance = $uibModal.open({
+            animation: login.animationsEnabled,
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'myModalContent.html',
+            controller: 'popupCtrl',
+            controllerAs: '$ctrl',
+            size: 'md'
+        });
+    }
+    login.toggleAnimation = function () {
+        login.animationsEnabled = !login.animationsEnabled;
+    }
+        
 } //Hoisting
 
 
@@ -47,4 +63,8 @@ function homeCtrl(){
 
     console.log("home ctrl")
 
+}
+
+function popupCtrl() {
+    console.log("dialog is working");
 }

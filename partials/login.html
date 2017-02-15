@@ -14,6 +14,10 @@
             <h3 class="text-center text-uppercase">company name </h3>
         </div>
         <div class="text-center panel">
+            <p>Already Have an Account</p>
+            <h3><button type="button" class="btn" style="background-color: #45B39D; color: white" ng-click="login.open('user')">Log In</button> </h3>
+        </div>
+        <div class="text-center panel">
             <h5>Login with facebook</h5>
         </div>
         <div class="text-center panel">
@@ -25,18 +29,33 @@
         </div>
     </div>
 </div>
-    <script type="text/ng-template" id="myModalContent.html">
+    <script type="text/ng-template" id="signUp.html">
         <div class="modal-header img-rounded" style="background-color: #45B39D; color: white; text-align: center">
             <h3 class="modal-title" id="modal-title">Create a New Account</h3>
         </div>
         <div class="modal-body form-group row" id="modal-body">
             <div class="col-xs-8 col-xs-offset-2" >
             <form name="form1">
-                <div class="list-group-item"><input type="email" class="form-control" name="user" placeholder="Email" ></div>
-                <div class="list-group-item"> <input type="text" class="form-control" name="user" placeholder="Username" ></div>
-                <div class="list-group-item"><input type="password" class="form-control" name="pass" placeholder="Password" ></div>
-                <div class="list-group-item"><input type="submit" style="background-color: #45B39D; color: white" name="login" class="login btn"  value="Sign Up"></div>
+                <div class="list-group-item"><input type="email" class="form-control" name="user" placeholder="Email" ng-model="popup.newuser.email" ></div>
+                <div class="list-group-item"> <input type="text" class="form-control" name="user" placeholder="Username" ng-model="popup.newuser.name" ></div>
+                <div class="list-group-item"><input type="password" class="form-control" name="pass" placeholder="Password" ng-model="popup.newuser.pass" ></div>
+                <div class="list-group-item"><input type="submit" style="background-color: #45B39D; color: white" name="login" ng-click="popup.signup()" class="login btn"  value="Sign Up"></div>
             </form>
                 </div>
         </div>
     </script>
+
+<script type="text/ng-template" id="login.html">
+    <div class="modal-header img-rounded" style="background-color: #45B39D; color: white; text-align: center">
+        <h3 class="modal-title" id="modal-title">Sign In</h3>
+    </div>
+    <div class="modal-body form-group row" id="modal-body">
+        <div class="col-xs-8 col-xs-offset-2" >
+            <form name="form2">
+                <div class="list-group-item"> <input type="text" class="form-control" name="user" placeholder="Username" ng-model="popup.curruser.name" ></div>
+                <div class="list-group-item"><input type="password" class="form-control" name="pass" placeholder="Password" ng-model="popup.curruser.pass" ></div>
+                <div class="list-group-item"><input type="submit" style="background-color: #45B39D; color: white" name="login" ng-click="popup.login()" class="login btn"  value="LogIn"></div>
+            </form>
+        </div>
+    </div>
+</script>

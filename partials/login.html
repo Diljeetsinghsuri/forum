@@ -54,6 +54,7 @@
             <form name="form2">
                 <div class="list-group-item"> <input type="text" class="form-control" name="user" placeholder="Username" ng-model="popup.curruser.name" ></div>
                 <div class="list-group-item"><input type="password" class="form-control" name="pass" placeholder="Password" ng-model="popup.curruser.pass" ></div>
+                <div class="list-group-item"><p>{{popup.msg}}</p></div>
                 <div class="list-group-item"><input type="submit" style="background-color: #45B39D; color: white" name="login" ng-click="popup.login()" class="login btn"  value="LogIn"></div>
             </form>
         </div>

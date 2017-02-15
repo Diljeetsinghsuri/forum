@@ -8,6 +8,9 @@
 <script src="lib/jquery/dist/jquery.min.js"></script>
 <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
 <script src="lib/angular/angular.js"></script>
+    <script src="js/localForage.js"></script>
+<script src="js/angular-localForage.js"></script>
+
 <script src="lib/angular-route/angular-route.js"></script>
 <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="js/app.js"></script>
@@ -60,6 +63,7 @@
                             <li><a href="#">Power System</a></li>
                         </ul>
                     </li>
+                    <li><button class="btn" style="background-color: #45B39D; color: white;" ng-click="nav.logout()">LogOut</button></li>
                 </ul>
             </div>
         </nav>

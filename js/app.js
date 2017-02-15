@@ -1,7 +1,7 @@
 /**
  * Created by abhishekrathore on 2/13/17.
  */
-angular.module("forum",["ngRoute","ui.bootstrap"])
+angular.module("forum",["ngRoute","ui.bootstrap","LocalForageModule"])
     .config(function($routeProvider){
 
         $routeProvider
@@ -11,7 +11,7 @@ angular.module("forum",["ngRoute","ui.bootstrap"])
                     controller:"loginCtrl",
                     controllerAs :"login"
                 })
-            .when("/home",
+            .when("/home/:id",
                 {
                     templateUrl: "partials/home.html",
                     controller:"homeCtrl",
@@ -19,9 +19,17 @@ angular.module("forum",["ngRoute","ui.bootstrap"])
                 })
 
     })
-    .service("dataService",function () {
+    .service("dataService",function ($localForage) {
         var dataServe =this ;
         dataServe.users =[];
+        (function (users) {
+                $localForage.getItem("users").then(function (data) {
+                    console.log(data);
+
+                    for(i=0;i<data.length;i++)
+                        users.push(data[i]);
+                })
+            })(dataServe.users)
     })
     .controller("navCtrl",navCtrl)
     .controller("loginCtrl",loginCtrl)
@@ -29,10 +37,14 @@ angular.module("forum",["ngRoute","ui.bootstrap"])
     .controller("popupCtrl",popupCtrl)
 
 
-function navCtrl($rootScope) {
+function navCtrl($rootScope,$location) {
     var nav = this ;
     console.log("nav");
     $rootScope.showNav = false;
+    nav.logout = function () {
+        $location.path("/");
+        $rootScope.showNav = false;
+    }
 }
 
 
@@ -71,29 +83,43 @@ function loginCtrl($uibModal){
 } //Hoisting
 
 
-function homeCtrl(dataService){
+function homeCtrl(dataService,$localForage,$routeParams){
 
     var home = this;
     home.users =dataService.users ;
-
+    home.curruser = home.users[$routeParams.id]
+    console.log(home.curruser);
     console.log("home ctrl")
 
 }
 
-function popupCtrl($location,$uibModalInstance,$rootScope,dataService) {
+function popupCtrl($location,$uibModalInstance,$rootScope,dataService,$localForage) {
     console.log("dialog is working");
     var popup = this;
+
     popup.users =dataService.users;
     popup.login = function () {
         console.log("login");
-        $location.path("/home");
-        $uibModalInstance.close();
-        $rootScope.showNav = true;
+        for(i=0;i<popup.users.length;i++)
+        {
+            if((popup.users[i].name == popup.curruser.name) && (popup.users[i].pass == popup.curruser.pass))
+            {
+                $location.path("/home/"+i);
+                $uibModalInstance.close();
+                $rootScope.showNav = true;
+            }
+            else
+            {
+                popup.msg = "Seems you don't have account PLEASE SIGN UP";
+                console.log("new user sign up");
+            }
+        }
     }
     popup.signup =function () {
         console.log("sign up");
         popup.users.push(popup.newuser);
-        $location.path("/home");
+        $localForage.setItem("users",popup.users);
+        $location.path("/home/"+popup.users.length);
         $uibModalInstance.close();
         $rootScope.showNav = true;
     }

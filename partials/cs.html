@@ -32,17 +32,17 @@
 	<div class="col-sm-8 panel-group">
 	<div class="panel-body">
 		<div class="panel-body" style="border:1px solid #45B39D">
-		<form method="post" enctype="multipart/form-data">
+		<form name="form3">
 			<div class="form-group">
-				<div class="panel"><textarea class="form-control" placeholder="Enter your Query"></textarea></div>
+				<div class="panel"><textarea class="form-control" placeholder="Enter your Query" ng-model="data.newquery.query"></textarea></div>
 				<div class="panel-default"><input class="form-control" type="file" /></div>
-			<div class="panel-default"><input class="btn" style="background-color:#45B39D; color:white; float:right;" type="submit" name="submit" value="Post"/></div>
+			<div class="panel-default"><input class="btn" style="background-color:#45B39D; color:white; float:right;" type="submit" ng-click="data.askquery()" value="Post"></div>
 			</div>
 			</form>
 			</div>
 		</div>
-			<div class="panel-body">
-			<div class="panel-body"  style="border:1px solid #45B39D">
+			<div class="panel-body" style="background-color: white">
+			<div class="panel-body"  style="border:1px solid #45B39D;">
 				<div class="panel-heading">Diljeet Singh Suri</div>
 				<div class="panel-body">Some question to ask ?</div>
 				<div class="panel-footer"><a href="#"><span class="glyphicon-thumbs-up glyphicon"></span></a></div>

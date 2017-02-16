@@ -17,7 +17,12 @@ angular.module("forum",["ngRoute","ui.bootstrap","LocalForageModule"])
                     controller:"homeCtrl",
                     controllerAs :"home"
                 })
-
+            .when("/data/:topic",
+                {
+                    templateUrl: "partials/cs.html",
+                    controller: "dataCtrl",
+                    controllerAs: "data"
+                })
     })
     .service("dataService",function ($localForage) {
         var dataServe =this ;
@@ -35,7 +40,7 @@ angular.module("forum",["ngRoute","ui.bootstrap","LocalForageModule"])
     .controller("loginCtrl",loginCtrl)
     .controller("homeCtrl",homeCtrl)
     .controller("popupCtrl",popupCtrl)
-
+    .controller("dataCtrl",dataCtrl)
 
 function navCtrl($rootScope,$location) {
     var nav = this ;
@@ -83,12 +88,16 @@ function loginCtrl($uibModal){
 } //Hoisting
 
 
-function homeCtrl(dataService,$localForage,$routeParams){
+function homeCtrl(dataService,$localForage,$routeParams,$timeout,$rootScope){
 
     var home = this;
     home.users =dataService.users ;
-    home.curruser = home.users[$routeParams.id]
-    console.log(home.curruser);
+    console.log(home.users);
+    $timeout(function () {
+        home.curruser = home.users[$routeParams.id];
+    },50);
+    $rootScope.curuser =home.curruser;
+    console.log($routeParams.id);
     console.log("home ctrl")
 
 }
@@ -119,8 +128,32 @@ function popupCtrl($location,$uibModalInstance,$rootScope,dataService,$localFora
         console.log("sign up");
         popup.users.push(popup.newuser);
         $localForage.setItem("users",popup.users);
-        $location.path("/home/"+popup.users.length);
+        $location.path("/home/"+(popup.users.length-1));
         $uibModalInstance.close();
         $rootScope.showNav = true;
+    }
+}
+
+function dataCtrl($rootScope,$routeParams) {
+    console.log("data is not working");
+    var data = this ;
+    /*data.querys =[];
+    (function (querys) {
+        $localForage.getItem("querys").then(function (data) {
+            console.log(data);
+
+            for(i=0;i<data.length;i++)
+                querys.push(data[i]);
+        })
+    })(data.querys)*/
+    data.user = $rootScope.curuser;
+    data.askquery = function () {
+        data.newquery.topic = $routeParams.topic ;
+        data.newquery.username = data.user;
+        data.newquery.time = new Date();
+        console.log("post work");
+        console.log(data.newquery);
+        //data.querys.push(data.newquery);
+        //$localForage.setItem("querys",data.querys);
     }
 }

@@ -5,69 +5,96 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>login</title>
 <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="lib/bootstrap-social/bootstrap-social.css" />
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css" />
+<link rel="stylesheet" href="css/custom.css"/>
 <script src="lib/jquery/dist/jquery.min.js"></script>
 <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
 <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-fblogin/dist/angular-fblogin.js"></script>
     <script src="js/localForage.js"></script>
 <script src="js/angular-localForage.js"></script>
-
+    <script src="lib/ng-file-upload/ng-file-upload-shim.min.js"></script>
+    <script src="lib/ng-file-upload/ng-file-upload.min.js"></script>
+<script src="js/parse.min.js"></script>
 <script src="lib/angular-route/angular-route.js"></script>
 <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-<script src="js/app.js"></script>
-
+<script src="js/app.module.js"></script>
+<script src="js/app.route.js"></script>
+    <script src="js/services/data.service.js"></script>
+    <script src="js/controllers/data.Ctrl.js"></script>
+    <script src="js/controllers/home.Ctrl.js"></script>
+    <script src="js/controllers/login.Ctrl.js"></script>
+    <script src="js/controllers/nav.Ctrl.js"></script>
+    <script src="js/controllers/popup.Ctrl.js"></script>
+    <script src="js/controllers/admin.Ctrl.js"></script>
+    <script src="js/filters/reverse.Filter.js"></script>
 </head>
 
-<body style="background-color:#CCCCCC">
-<div class="container">
-    <div ng-controller="navCtrl as nav" ng-show="showNav">
-        <nav class="navbar navbar-inverse">
-            <div class="navbar-header">
-                <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div id="navbarCollapse" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle"  data-toggle="dropdown">Common
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#!/data/math">Maths</a></li>
-                            <li><a href="#">Aptitude</a></li>
-                            <li><a href="#">DE</a></li>
-                            <li><a href="#">Control System</a></li>
-                            <li><a href="#">Network</a></li>
-                            <li><a href="#">Signal & System</a></li>
-                            <li><a href="#">Analogy</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class=" dropdown-toggle" data-toggle="dropdown">ECE
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">EMFT</a></li>
-                            <li><a href="#">EDC</a></li>
-                            <li><a href="#">Communication</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class=" dropdown-toggle"  data-toggle="dropdown">EE
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Machine</a></li>
-                            <li><a href="#">Measurement & Instrument</a></li>
-                            <li><a href="#">Power Electronics</a></li>
-                            <li><a href="#">Power System</a></li>
-                        </ul>
-                    </li>
-                    <li><button class="btn" style="background-color: #45B39D; color: white; margin-top: 8px" ng-click="nav.logout()">LogOut</button></li>
+<body style="background-color: honeydew" >
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1758883814427328";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="navibar" ng-controller="navCtrl as nav" ng-show="showNav" >
+    <nav class="navbar navbar-inverse" >
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="dropdown-toggle"  data-toggle="dropdown">Common
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="sub in nav.sub"><a ng-click="nav.selectSub(sub)">{{sub.attributes.name}}</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class=" dropdown-toggle" data-toggle="dropdown">ECE
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">EMFT</a></li>
+                        <li><a href="#">EDC</a></li>
+                        <li><a href="#">Communication</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class=" dropdown-toggle"  data-toggle="dropdown">EE
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Machine</a></li>
+                        <li><a href="#">Measurement & Instrument</a></li>
+                        <li><a href="#">Power Electronics</a></li>
+                        <li><a href="#">Power System</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="pull-right col-sm-2 btn dropdown" style="margin-top: 8px;" >
+                <a style="color: #45B39D;" class="dropdown-toggle" data-toggle = "dropdown">
+                    <span class="glyphicon glyphicon-user"></span>Profile
+                    <span class="caret"></span> </a>
+                <ul class="dropdown-menu " style="background-color: black; color: #45B39D; margin-top: 8px; opacity: 0.85">
+                    <li class="text-center"><a href="#!/home"> Home</a></li>
+                    <li class="text-center">Edit</li>
+                    <li class="text-center"><button class="btn logout-btn" ng-click="nav.logout()">LogOut</button></li>
                 </ul>
             </div>
-        </nav>
-    </div>
+        </div>
+    </nav>
+</div>
+<div class="container main-content">
+
 <ng-view></ng-view>
 </div>
 </body>

@@ -1,59 +1,59 @@
 
-	<div class="row">
-		<div class="col-sm-4 panel">
-		<div class="panel-warning panel-default">
-			<div class="panel-heading" style="background-color:#45B39D; color:white;">Attachment</div>
-			<div class="panel-body" style="border:1px solid #45B39D; border-top:none;">
+<div class="row">
+	<div class="col-sm-4 panel">
+		<div class="panel-default attach">
+			<div class="panel-heading attach-head">Attachment</div>
+			<div class="panel-body attach-body" >
 				<table class="table table-responsive">
 					<tr>
 						<th>Filename</th>
 						<th>&nbsp;</th>
 					</tr>
-					<tr>
-						<td>abc</td>
-						<td><a href="#">Download</a></td>
-					</tr>
-					<tr>
-						<td>abc</td>
-						<td><a href="#">Download</a></td>
-					</tr>
-					<tr>
-						<td>abc</td>
-						<td><a href="#">Download</a></td>
-					</tr>
-					<tr>
-						<td>abc</td>
-						<td><a href="#">Download</a></td>
+					<tr ng-repeat="attach in data.disAttach">
+						<td>{{attach.attributes.name}}</td>
+						<td><a ng-href="{{attach.attributes.file._url}}">Download</a></td>
 					</tr>
 				</table>
 			</div>
 		</div>
 	</div>
 	<div class="col-sm-8 panel-group">
-	<div class="panel-body">
-		<div class="panel-body" style="border:1px solid #45B39D">
+	<div class="panel-body post" ng-if="data.user.attributes.username != 'admin'">
 		<form name="form3">
 			<div class="form-group">
-				<div class="panel"><textarea class="form-control" placeholder="Enter your Query" ng-model="data.newquery.query"></textarea></div>
-				<div class="panel-default"><input class="form-control" type="file" /></div>
-			<div class="panel-default"><input class="btn" style="background-color:#45B39D; color:white; float:right;" type="submit" ng-click="data.askquery()" value="Post"></div>
+				<div class="row">
+					<div class="col-xs-10 col-xs-offset-2 small-margin-bottom "><textarea ng-class="data.textClass" class="form-control" placeholder="Enter your Query" ng-model="data.query"></textarea></div>
+				</div>
+				<div class="row">
+					<div class="col-xs-10 col-xs-offset-2"><input class="form-control" ngf-select="data.uploadPostImage()" name="image"
+																  accept=".png, .jpg, .jpeg" ngf-max-size="2MB"
+																  ngf-model-invalid="data.errorFile" type="file" ng-model="data.attach" /></div>
+				</div>
 			</div>
-			</form>
-			</div>
+		</form>
+		<div class="col-xs-offset-2 col-xs-3">
+			<p ng-show="data.divId"><img src="loading.gif" alt="loading" style="max-width: 50px; max-height: 50px"></p>
+			<p ng-show="data.divImg "><img ng-src="{{data.imgPath._url}}" alt="image" style="max-width: 50px; max-height: 50px"></p>
 		</div>
-			<div class="panel-body" style="background-color: white">
-			<div class="panel-body"  style="border:1px solid #45B39D;">
-				<div class="panel-heading">Diljeet Singh Suri</div>
-				<div class="panel-body">Some question to ask ?</div>
-				<div class="panel-footer"><a href="#"><span class="glyphicon-thumbs-up glyphicon"></span></a></div>
+		<div class="panel-default pull-right"><input class="btn post-btn" type="button" ng-disabled="data.divId" ng-click="data.postQuery()" value="Post"></div>
+	</div>
+			<div class="panel-body post" ng-repeat="post in data.disPost | reverse">
+			<div class="row"  style="background-color: white">
+				<div class="col-xs-3 col-sm-1">
+					<img src='#'
+						 alt="Profile Picture" class="img-responsive img-rounded img-post-profile">
+				</div>
+				<div class="col-xs-9 col-sm-11">
+					<span><strong>{{post.attributes.user.attributes.username}}</strong></span>
+					<small class="pull-right">{{post.attributes.createdAt.toString()}}</small>
+					<hr class="small-margin-top" style="border: solid 2px #45B39D"></hr>
+				</div>
+			</div>
+				<div class="row"><div class="col-xs-9 col-xs-offset-1"> {{post.attributes.data}}</div></div>
+				<div class="row"><div class="col-xs-9 col-xs-offset-1"> <img class="img-responsive" ng-src="{{post.attributes.image._url}}"></div></div>
+				<div class="row"><div class="col-xs-offset-1" ng-class="data.likeClass[post.id]"> <a ng-click="data.likePost(post)"><span class="glyphicon-thumbs-up glyphicon"></span></a></div><div class="col-xs-2">{{post.attributes.likesTotal}}</div></div>
 			</div>
 			</div>
-			<div class="panel-body">
-			<div class="panel-body"  style="border:1px solid #45B39D">
-				<div class="panel-heading">Diljeet Singh Suri</div>
-				<div class="panel-body">Some question to ask ?</div>
-				<div class="panel-footer"><a href="#"><span class="glyphicon-thumbs-up glyphicon"></span></a></div>
-			</div>
-			</div>
+
 		</div>
 	</div>

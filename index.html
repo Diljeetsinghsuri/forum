@@ -5,30 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>login</title>
 <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="lib/bootstrap-social/bootstrap-social.css" />
-    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css" />
+<link rel="stylesheet" href="lib/bootstrap-social/bootstrap-social.css" />
+<link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css" />
 <link rel="stylesheet" href="css/custom.css"/>
 <script src="lib/jquery/dist/jquery.min.js"></script>
 <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
 <script src="lib/angular/angular.js"></script>
-    <script src="lib/angular-fblogin/dist/angular-fblogin.js"></script>
-    <script src="js/localForage.js"></script>
+<script src="lib/angular-fblogin/dist/angular-fblogin.js"></script>
+<script src="js/localForage.js"></script>
 <script src="js/angular-localForage.js"></script>
-    <script src="lib/ng-file-upload/ng-file-upload-shim.min.js"></script>
-    <script src="lib/ng-file-upload/ng-file-upload.min.js"></script>
+<script src="lib/ng-file-upload/ng-file-upload-shim.min.js"></script>
+<script src="lib/ng-file-upload/ng-file-upload.min.js"></script>
 <script src="js/parse.min.js"></script>
 <script src="lib/angular-route/angular-route.js"></script>
 <script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="js/app.module.js"></script>
 <script src="js/app.route.js"></script>
-    <script src="js/services/data.service.js"></script>
-    <script src="js/controllers/data.Ctrl.js"></script>
-    <script src="js/controllers/home.Ctrl.js"></script>
-    <script src="js/controllers/login.Ctrl.js"></script>
-    <script src="js/controllers/nav.Ctrl.js"></script>
-    <script src="js/controllers/popup.Ctrl.js"></script>
-    <script src="js/controllers/admin.Ctrl.js"></script>
-    <script src="js/filters/reverse.Filter.js"></script>
+<script src="js/services/data.service.js"></script>
+<script src="js/controllers/data.Ctrl.js"></script>
+<script src="js/controllers/home.Ctrl.js"></script>
+<script src="js/controllers/login.Ctrl.js"></script>
+<script src="js/controllers/nav.Ctrl.js"></script>
+<script src="js/controllers/popup.Ctrl.js"></script>
+<script src="js/controllers/admin.Ctrl.js"></script>
+<script src="js/filters/reverse.Filter.js"></script>
 </head>
 
 <body style="background-color: honeydew" >
@@ -57,26 +57,21 @@
                     <a class="dropdown-toggle"  data-toggle="dropdown">Common
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li ng-repeat="sub in nav.sub"><a ng-click="nav.selectSub(sub)">{{sub.attributes.name}}</a></li>
+                        <li ng-repeat="sub in nav.subCom"><a ng-click="nav.selectSub(sub)">{{sub.attributes.name}}</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a class=" dropdown-toggle" data-toggle="dropdown">ECE
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">EMFT</a></li>
-                        <li><a href="#">EDC</a></li>
-                        <li><a href="#">Communication</a></li>
+                        <li ng-repeat="sub in nav.subEce"><a ng-click="nav.selectSub(sub)">{{sub.attributes.name}}</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a class=" dropdown-toggle"  data-toggle="dropdown">EE
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Machine</a></li>
-                        <li><a href="#">Measurement & Instrument</a></li>
-                        <li><a href="#">Power Electronics</a></li>
-                        <li><a href="#">Power System</a></li>
+                        <li ng-repeat="sub in nav.subEe"><a ng-click="nav.selectSub(sub)">{{sub.attributes.name}}</a></li>
                     </ul>
                 </li>
             </ul>

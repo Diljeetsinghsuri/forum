@@ -7,13 +7,23 @@ function navCtrl($rootScope,$location,$timeout,dataService) {
     var nav = this ;
     console.log("nav");
     $rootScope.showNav = false;
-    nav.sub=[];
+    nav.subEce =[];
+    nav.subEe = [];
+    nav.subCom = [];
     var Subject = Parse.Object.extend("Subject");
     var query = new Parse.Query(Subject);
     query.find({
         success: function(results) {
             $timeout(function () {
-                nav.sub = results ;
+                for(i=0;i<results.length;i++)
+                {
+                    if(results[i].attributes.category == "ECE")
+                        nav.subEce.push(results[i]);
+                    else if(results[i].attributes.category == "EE")
+                        nav.subEe.push(results[i]);
+                    else
+                        nav.subCom.push(results[i]);
+                }
             },50);
             console.log(nav.sub[0].attributes)
 

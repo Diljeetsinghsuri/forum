@@ -31,7 +31,7 @@ angular.module("forum").config(function($routeProvider){
 })
     .run(function ($location,$timeout,$rootScope) {
         Parse.initialize("myAppId");
-        Parse.serverURL = 'https://glacial-sands-81357.herokuapp.com/parse';
+        Parse.serverURL = 'https://forum-app-gate.herokuapp.com/parse';
         var user =Parse.User.current();
         if(user)
         {

@@ -6,35 +6,41 @@ angular.module("forum").controller("popupCtrl",popupCtrl)
 function popupCtrl($location,$uibModalInstance,$rootScope,dataService,$timeout,$localForage) {
     console.log("dialog is working");
     var popup = this;
-
+    popup.curruser = {};
+    popup.newuser = {};
     popup.users =dataService.users;
     popup.login = function () {
-        Parse.User.logIn(popup.curruser.name, popup.curruser.pass, {
-            success: function(user) {
-                console.log(user);
-                if(user.attributes.username == "admin")
-                {
-                    $location.path("/admin");
-                    $uibModalInstance.close();
-                    $rootScope.showNav = true;
-                }
-                else
-                {
-                    $location.path("/home");
-                    $uibModalInstance.close();
-                    $rootScope.showNav = true;
-                }
+        if(popup.curruser.name && popup.curruser.pass){
+            Parse.User.logIn(popup.curruser.name, popup.curruser.pass, {
+                success: function(user) {
+                    console.log(user);
+                    if(user.attributes.username == "admin")
+                    {
+                        $location.path("/admin");
+                        $uibModalInstance.close();
+                        $rootScope.showNav = true;
+                    }
+                    else
+                    {
+                        $location.path("/home");
+                        $uibModalInstance.close();
+                        $rootScope.showNav = true;
+                    }
 
-                // Do stuff after successful login.
-            },
-            error: function(user, error) {
-                $timeout(function(){
-                    popup.msg = "Seems you don't have account PLEASE SIGN UP";
-                    console.log("new user sign up");
-                },50)
-                // The login failed. Check error to see why.
-            }
-        });
+                    // Do stuff after successful login.
+                },
+                error: function(user, error) {
+                    $timeout(function(){
+                        popup.msg = "Seems you don't have account PLEASE SIGN UP";
+                        console.log("new user sign up");
+                    },50)
+                    // The login failed. Check error to see why.
+                }
+            });
+        }
+        else{
+            popup.msg = "Fill all fields";
+        }
     }
     /*popup.login = function () {
      console.log("login");
@@ -54,23 +60,49 @@ function popupCtrl($location,$uibModalInstance,$rootScope,dataService,$timeout,$
      }
      }*/
     popup.signup =function () {
-        var user = new Parse.User();
-        user.set("username", popup.newuser.name);
-        user.set("password", popup.newuser.pass);
-        user.set("email", popup.newuser.email);
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(popup.newuser.email)){
+            var user = new Parse.User();
+            user.set("username", popup.newuser.name);
+            user.set("password", popup.newuser.pass);
+            user.set("email", popup.newuser.email);
+             user.set("name", popup.newuser.name);
 
-        user.signUp(null, {
-            success: function(user) {
-                // Hooray! Let them use the app now.
-                $location.path("/home");
-                $uibModalInstance.close();
-                $rootScope.showNav = true;
-            },
-            error: function(user, error) {
-                // Show the error message somewhere and let the user try again.
-                alert("Error: " + error.code + " " + error.message);
-            }
-        });
+            user.signUp(null, {
+                success: function(user) {
+                    // Hooray! Let them use the app now.
+                    $location.path("/home");
+                    $uibModalInstance.close();
+                    $rootScope.showNav = true;
+                },
+                error: function(user, error) {
+                    // Show the error message somewhere and let the user try again.
+                    alert("Error: " + error.code + " " + error.message);
+                }
+            });
+        }
+        else{
+            alert("ereeoee")
+        }
+    }
+    popup.fbEmail = function(){
+        if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(popup.curruser.email)){
+            var user =Parse.User.current();
+            user.set("email", popup.curruser.email);
+            user.save(null,{
+                success:function(success){
+                    $uibModalInstance.close()
+                },
+                error: function(error){
+                    console.log(error)
+                    if(error.code == 203){
+                        popup.msg = "User Already exsist with this email";
+                    }
+                }
+            })
+        }
+        else{
+            popup.msg = "Fill all fields";
+        }
     }
 
     /*popup.signup =function () {

@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>login</title>
 <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+
+<link href="css/business-casual.css" rel="stylesheet">
+
 <link rel="stylesheet" href="lib/bootstrap-social/bootstrap-social.css" />
 <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css" />
 <link rel="stylesheet" href="css/custom.css"/>
@@ -31,7 +34,7 @@
 <script src="js/filters/reverse.Filter.js"></script>
 </head>
 
-<body style="background-color: honeydew" >
+<body style="background-color: honeydew" ng-controller="navCtrl as nav">
 
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
@@ -88,9 +91,79 @@
         </div>
     </nav>
 </div>
-<div class="container main-content">
+<div class="container main-content" ng-hide="nav.aboutUs">
 
 <ng-view></ng-view>
+
+</div>
+<div ng-show="nav.aboutUs" >   
+<div class="brand" >GATE QA</div>
+    <div class="address-bar">An Engineer's Guide to Success</div>
+	<div class="row" style="width:100%">
+		<div class="login-btn btn col-sm-offset-10 col-sm-1" ng-click="nav.hideAboutUs(false)" style="background: rgba(255,255,255,0.9);"><a  style="color:black;">login</a></div>
+	</div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+                <a class="navbar-brand" href="index.html">Business Casual</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+             
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">About Us
+                    </h2>
+                    <hr>
+                </div>
+                <div class="col-md-6">
+                    <img class="img-responsive img-border-left" src="img/pic.jpg" alt="">
+                </div>
+                <div class="col-md-6">
+                    <p>This site is maintained by a duo of ex-IITian and IES exam cracker who are passionate about teaching.</p>
+
+<p>Mr.keshav Sanadhya is renowned faculty in ece and currently senior faculty and a member of advisory committee of electronic and communication in Engineers Academy Jaipur one of the leading institute for GATE and IES. </p>
+
+<p>Mr. Mohan Choudhary is one of best in electrical department currently giving his services in railway(IES) also gives his precious guidance to students for cracking the exam.</p>
+
+<p>This website is a medium to interact with these experts to consult your problem and betterment for your exam preparation. For queries - one should register on this site.</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- /.container -->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>Powered by Youstart</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
 </body>
 </html>

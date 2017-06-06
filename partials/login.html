@@ -50,3 +50,17 @@
         </div>
     </div>
 </script>
+<script type="text/ng-template" id="getEmail.html">
+    <div class="modal-header img-rounded" style="background-color: #45B39D; color: white; text-align: center">
+        <h3 class="modal-title" id="modal-title">Email</h3>
+    </div>
+    <div class="modal-body form-group row" id="modal-body">
+        <div class="col-xs-8 col-xs-offset-2" >
+            <form name="form3">
+                <div class="list-group-item"> <input type="email" class="form-control" name="user" placeholder="Username" ng-model="popup.curruser.email" ></div>
+                <div class="list-group-item"><p>{{popup.msg}}</p></div>
+                <div class="list-group-item"><input type="submit" style="background-color: #45B39D; color: white" name="login" ng-click="popup.fbEmail()" class="login btn"  value="Save Email"></div>
+            </form>
+        </div>
+    </div>
+</script>

@@ -10,6 +10,10 @@ function navCtrl($rootScope,$location,$timeout,dataService) {
     nav.subEce =[];
     nav.subEe = [];
     nav.subCom = [];
+    nav.aboutUs = true;
+    nav.hideAboutUs = function(value){
+        nav.aboutUs = value;
+    }
     var Subject = Parse.Object.extend("Subject");
     var query = new Parse.Query(Subject);
     query.find({

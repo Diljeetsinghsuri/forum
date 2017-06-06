@@ -50,10 +50,26 @@ function loginCtrl($uibModal, $location, $rootScope, $timeout){
 
                     Parse.FacebookUtils.logIn(facebookAuthData).then(
                         function(){
-                            $timeout(function () {
-                                $rootScope.showNav = true ;
-                                $location.path("/home");
-                            },50)
+                            var user = Parse.User.current();
+                            user.set("name",response.name)
+                            user.save().then(function(){
+                                if(!user.get("email")){
+                                var modalInstance = $uibModal.open({
+                                    animation: login.animationsEnabled,
+                                    ariaLabelledBy: 'modal-title',
+                                    ariaDescribedBy: 'modal-body',
+                                    templateUrl: 'getEmail.html',
+                                    controller: 'popupCtrl',
+                                    controllerAs: 'popup',
+                                    backdrop: 'static', 
+                                    keyboard: false,
+                                    size: 'md'})
+                                }
+                                $timeout(function () {
+                                    $rootScope.showNav = true ;
+                                    $location.path("/home");
+                                },50)
+                            });
                         }
 
                     );

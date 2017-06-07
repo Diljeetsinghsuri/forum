@@ -13,6 +13,8 @@ function dataCtrl($rootScope,$routeParams,dataService,$timeout) {
     data.divId = false;
     data.disPost = [];
     data.likeClass = [];
+    data.menuName = dataService.currSub.toJSON().name;
+    console.log(data.menuName);
     console.log($routeParams.id);
 
     /*retrieving attachments */

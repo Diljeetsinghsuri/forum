@@ -4,9 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>login</title>
-<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
-
 <link href="css/business-casual.css" rel="stylesheet">
+<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
 
 <link rel="stylesheet" href="lib/bootstrap-social/bootstrap-social.css" />
 <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css" />
@@ -44,8 +43,8 @@
     js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1758883814427328";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-<div class="navibar" ng-controller="navCtrl as nav" ng-show="showNav" >
-    <nav class="navbar navbar-inverse" >
+<div class="navibar" ng-controller="navCtrl as nav"  >
+    <nav class="navbar navbar-inverse" ng-if="showNav">
         <div class="navbar-header">
             <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
                 <span class="sr-only">Toggle navigation</span>
@@ -80,26 +79,26 @@
             </ul>
             <div class="pull-right col-sm-2 btn dropdown" style="margin-top: 8px;" >
                 <a style="color: #45B39D;" class="dropdown-toggle" data-toggle = "dropdown">
-                    <span class="glyphicon glyphicon-user"></span>Profile
+                    <span class="glyphicon glyphicon-user" style="margin-right: 10px;" ></span>{{currentUser.name}}
                     <span class="caret"></span> </a>
                 <ul class="dropdown-menu " style="background-color: black; color: #45B39D; margin-top: 8px; opacity: 0.85">
-                    <li class="text-center"><a href="#!/home"> Home</a></li>
-                    <li class="text-center">Edit</li>
+                    <li class="text-center"><a  style="color: #45B39D;" href="#!/home"> Profile</a></li>
+                    <!--<li class="text-center">Edit</li>-->
                     <li class="text-center"><button class="btn logout-btn" ng-click="nav.logout()">LogOut</button></li>
                 </ul>
             </div>
         </div>
     </nav>
 </div>
-<div class="container main-content" ng-hide="nav.aboutUs">
+<div class="container main-content" ng-hide="aboutUs">
 
 <ng-view></ng-view>
 
 </div>
-<div ng-show="nav.aboutUs" >   
+<div ng-show="aboutUs" >   
 <div class="brand" >GATE QA</div>
     <div class="address-bar">An Engineer's Guide to Success</div>
-	<div class="row" style="width:100%">
+	<div class="row" style="width:100%; margin-bottom: 20px;">
 		<div class="login-btn btn col-sm-offset-10 col-sm-1" ng-click="nav.hideAboutUs(false)" style="background: rgba(255,255,255,0.9);"><a  style="color:black;">login</a></div>
 	</div>
     <!-- Navigation -->

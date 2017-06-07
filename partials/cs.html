@@ -1,7 +1,8 @@
 
 <div class="row">
 	<div class="col-sm-4 panel">
-		<div class="panel-default attach">
+		<div style="color: white; position: fixed;"><h3>{{data.menuName}}</h3></div>
+		<div class="panel-default attach" style="margin-top: 60px;" ng-if="data.disAttach.length">
 			<div class="panel-heading attach-head">Attachment</div>
 			<div class="panel-body attach-body" >
 				<table class="table table-responsive">
@@ -44,7 +45,7 @@
 						 alt="Profile Picture" class="img-responsive img-rounded img-post-profile">
 				</div>
 				<div class="col-xs-9 col-sm-11">
-					<span><strong>{{post.attributes.user.attributes.username}}</strong></span>
+					<span><strong>{{post.attributes.user.attributes.name}}</strong></span>
 					<small class="pull-right">{{post.attributes.createdAt.toString()}}</small>
 					<hr class="small-margin-top" style="border: solid 2px #45B39D"></hr>
 				</div>

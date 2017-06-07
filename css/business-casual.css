@@ -32,8 +32,8 @@ p {
 }
 
 hr {
-    max-width: 400px;
-    border-color: #999999;
+    max-width: 400px!important;
+    border-color: #999999!important;
 }
 
 .brand,
@@ -164,6 +164,7 @@ footer p {
         border: none;
         background: #fff;
         background: rgba(255,255,255,0.9);
+        display: none;
     }
 
     .nav>li>a {

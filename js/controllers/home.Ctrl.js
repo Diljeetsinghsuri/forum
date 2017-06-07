@@ -3,12 +3,17 @@
  */
 angular.module("forum").controller("homeCtrl",homeCtrl)
 
-function homeCtrl(dataService,$localForage,$routeParams,$timeout,$uibModal, $scope){
+function homeCtrl(dataService, $localForage, $routeParams, $timeout, $uibModal, $scope, $rootScope){
 
     var home = this;
     home.user = Parse.User.current().attributes;
     console.log(home.user);
     console.log(Parse.User.current());
+    if (Parse.User.current()) {
+        $timeout(function () {
+            $rootScope.currentUser = Parse.User.current().toJSON();
+        }, 200);
+    }
 
     var Post = Parse.Object.extend("Post");
     var query = new Parse.Query(Post);

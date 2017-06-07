@@ -29,12 +29,14 @@ angular.module("forum").config(function($routeProvider){
                 controllerAs: "admin"
             })
 })
-    .run(function ($location,$timeout,$rootScope) {
+    .run(function ($location, $timeout, $rootScope) {
+        $rootScope.aboutUs = false;
         Parse.initialize("myAppId");
         Parse.serverURL = 'https://forum-app-gate.herokuapp.com/parse';
         var user =Parse.User.current();
         if(user)
         {
+            $rootScope.aboutUs = false;
             if(user.attributes.username == "admin")
             $timeout(function () {
                 $location.path('/admin');
@@ -48,6 +50,7 @@ angular.module("forum").config(function($routeProvider){
         }
         else
         {
+            $rootScope.aboutUs = true;
             $location.path('/');
         }
     })

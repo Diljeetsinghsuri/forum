@@ -33,6 +33,7 @@ angular.module("forum").config(function($routeProvider){
         $rootScope.aboutUs = false;
         Parse.initialize("myAppId");
         Parse.serverURL = 'https://forum-app-gate.herokuapp.com/parse';
+        Parse.masterKey = 'myMasterKey';
         var user =Parse.User.current();
         if(user)
         {

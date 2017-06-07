@@ -82,7 +82,8 @@
                     <span class="glyphicon glyphicon-user" style="margin-right: 10px;" ></span>{{currentUser.name}}
                     <span class="caret"></span> </a>
                 <ul class="dropdown-menu " style="background-color: black; color: #45B39D; margin-top: 8px; opacity: 0.85">
-                    <li class="text-center"><a  style="color: #45B39D;" href="#!/home"> Profile</a></li>
+                    <li class="text-center" ng-if="currentUser.username != 'admin'"><a  style="color: #45B39D;" href="#!/home" > Profile</a></li>
+                    <li class="text-center" ng-if="currentUser.username == 'admin'"><a  style="color: #45B39D;" href="#!/admin" > Home</a></li>
                     <!--<li class="text-center">Edit</li>-->
                     <li class="text-center"><button class="btn logout-btn" ng-click="nav.logout()">LogOut</button></li>
                 </ul>

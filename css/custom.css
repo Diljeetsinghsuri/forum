@@ -98,3 +98,13 @@ ng-view .row .col-sm-8 .post form .form-group .row .col-xs-10 .requiredPost ,ng-
     box-shadow:0px 0px 5px red;
     border: 1px solid red;
 }
+.subject-title{
+    background: #45b39d;
+    top: -16px;
+    position: relative;
+    color: white;
+    padding: 10px;
+}
+hr.my-hr{
+    max-width: 100% !important;
+}

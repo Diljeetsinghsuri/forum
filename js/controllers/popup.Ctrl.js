@@ -22,7 +22,7 @@ function popupCtrl($location,$uibModalInstance,$rootScope,dataService,$timeout,$
                     }
                     else
                     {
-                        $location.path("/home");
+                        $location.path("/newFeeds");
                         $uibModalInstance.close();
                         $rootScope.showNav = true;
                     }
@@ -70,9 +70,20 @@ function popupCtrl($location,$uibModalInstance,$rootScope,dataService,$timeout,$
             user.signUp(null, {
                 success: function(user) {
                     // Hooray! Let them use the app now.
-                    $location.path("/home");
-                    $uibModalInstance.close();
-                    $rootScope.showNav = true;
+                    var UserData = Parse.Object.extend("UserData");
+                    userData = new UserData();
+                    userData.set("email",popup.newuser.email);
+                    userData.set("user",user);
+                    userData.save(null,{
+                        success: function(success){
+                            $location.path("/newFeeds");
+                            $uibModalInstance.close();
+                            $rootScope.showNav = true;
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                    })
                 },
                 error: function(user, error) {
                     // Show the error message somewhere and let the user try again.
@@ -90,7 +101,18 @@ function popupCtrl($location,$uibModalInstance,$rootScope,dataService,$timeout,$
             user.set("email", popup.curruser.email);
             user.save(null,{
                 success:function(success){
-                    $uibModalInstance.close()
+                    var UserData = Parse.Object.extend("UserData");
+                    userData = new UserData();
+                    userData.set("email",popup.curruser.email);
+                    userData.set("user",user);
+                    userData.save(null,{
+                        success: function(success){
+                            $uibModalInstance.close();
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                    })
                 },
                 error: function(error){
                     console.log(error)

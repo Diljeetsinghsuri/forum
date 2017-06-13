@@ -1,10 +1,13 @@
 
 <div class="row">
 	<div class="col-sm-4 panel">
-		<div style="color: white; position: fixed;"><h3>{{data.menuName}}</h3></div>
-		<div class="panel-default attach" style="margin-top: 60px;" ng-if="data.disAttach.length">
-			<div class="panel-heading attach-head">Attachment</div>
-			<div class="panel-body attach-body" >
+		<div class="title" style="color: black; position: fixed;"><h3>{{data.menuName}}</h3></div>
+		<div class="panel-default attach" style="margin-top: 60px;" >
+			<div class="panel-heading attach-head">Study material</div>
+			<div class="panel-body attach-body" ng-if="!data.disAttach.length" >
+				there is no material yet
+			</div>
+			<div class="panel-body attach-body" ng-if="data.disAttach.length" >
 				<table class="table table-responsive">
 					<tr>
 						<th>Filename</th>
@@ -20,13 +23,17 @@
 	</div>
 	<div class="col-sm-8 panel-group">
 	<div class="panel-body post" ng-if="data.user.attributes.username != 'admin'">
+		<div class="col-xs-2 col-sm-2">
+					<img src='img/avatar_dummy.png'
+						 alt="Profile Picture" class="img-responsive img-rounded img-post-profile">
+		</div>
 		<form name="form3">
-			<div class="form-group">
+			<div class="form-group col-xs-10">
 				<div class="row">
-					<div class="col-xs-10 col-xs-offset-2 small-margin-bottom "><textarea ng-class="data.textClass" class="form-control" placeholder="Enter your Query" ng-model="data.query"></textarea></div>
+					<div class="col-xs-12  small-margin-bottom "><textarea ng-class="data.textClass" class="form-control" placeholder="Enter your Query" ng-model="data.query"></textarea></div>
 				</div>
 				<div class="row">
-					<div class="col-xs-10 col-xs-offset-2"><input class="form-control" ngf-select="data.uploadPostImage()" name="image"
+					<div class="col-xs-12 "><input class="form-control" ngf-select="data.uploadPostImage()" name="image"
 																  accept=".png, .jpg, .jpeg" ngf-max-size="2MB"
 																  ngf-model-invalid="data.errorFile" type="file" ng-model="data.attach" /></div>
 				</div>
@@ -38,21 +45,26 @@
 		</div>
 		<div class="panel-default pull-right"><input class="btn post-btn" type="button" ng-disabled="data.divId" ng-click="data.postQuery()" value="Post"></div>
 	</div>
-			<div class="panel-body post" ng-repeat="post in data.disPost | reverse">
-			<div class="row"  style="background-color: white">
-				<div class="col-xs-3 col-sm-1">
-					<img src='#'
-						 alt="Profile Picture" class="img-responsive img-rounded img-post-profile">
-				</div>
-				<div class="col-xs-9 col-sm-11">
-					<span><strong>{{post.attributes.user.attributes.name}}</strong></span>
-					<small class="pull-right">{{post.attributes.createdAt.toString()}}</small>
-					<hr class="small-margin-top" style="border: solid 2px #45B39D"></hr>
+			<div class="panel-body post" ng-if="!data.disPost.length">
+				<div class="row"  style="background-color: white;padding: 10px 30px;">
+					There is no query posted yet
 				</div>
 			</div>
-				<div class="row"><div class="col-xs-9 col-xs-offset-1"> {{post.attributes.data}}</div></div>
-				<div class="row"><div class="col-xs-9 col-xs-offset-1"> <img class="img-responsive" ng-src="{{post.attributes.image._url}}"></div></div>
-				<div class="row"><div class="col-xs-offset-1" ng-class="data.likeClass[post.id]"> <a ng-click="data.likePost(post)"><span class="glyphicon-thumbs-up glyphicon"></span></a></div><div class="col-xs-2">{{post.attributes.likesTotal}}</div></div>
+			<div class="panel-body post" ng-repeat="post in data.disPost | reverse" ng-if="data.disPost.length">
+			<div class="row"  style="background-color: white">
+				<div class="col-xs-1 col-sm-2">
+					<img src='img/avatar_dummy.png'
+						 alt="Profile Picture" class="img-responsive img-rounded img-post-profile">
+				</div>
+				<div class="col-xs-11 col-sm-10">
+					<span><strong>{{post.attributes.user.attributes.name}}</strong></span>
+					<small class="pull-right">{{post.attributes.createdAt | date:'medium'}}</small>
+					<hr class="small-margin-top my-hr" style="border: solid 2px #45B39D"></hr>
+				</div>
+			</div>
+				<div class="row"><div class="col-xs-10 col-xs-offset-1"> {{post.attributes.data}}</div></div>
+				<div class="row"><div class="col-xs-10 col-xs-offset-1"> <img class="img-responsive feed-img" ng-src="{{post.attributes.image._url}}"></div></div>
+				<div class="row" style="margin-top: 10px;"><div class="panel-heading col-xs-10 col-xs-offset-1" ng-class="data.likeClass[post.id]"> <a ng-click="data.likePost(post)"><span class="glyphicon-thumbs-up glyphicon"></span></a><div class="likes-div">{{post.attributes.likesTotal}}</div></div></div>
 			</div>
 			</div>
 

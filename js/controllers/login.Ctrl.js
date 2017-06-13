@@ -67,7 +67,7 @@ function loginCtrl($uibModal, $location, $rootScope, $timeout){
                                 }
                                 $timeout(function () {
                                     $rootScope.showNav = true ;
-                                    $location.path("/home");
+                                    $location.path("/newFeeds");
                                 },50)
                             });
                         }

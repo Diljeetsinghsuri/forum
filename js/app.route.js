@@ -26,7 +26,24 @@ angular.module("forum").config(function($routeProvider){
             {
                 templateUrl: "partials/admin.html",
                 controller: "adminCtrl",
-                controllerAs: "admin"
+                controllerAs: "admin",
+                resolve : {
+                    check : function($location){
+                        var user =Parse.User.current();
+                        if(user.attributes.username != "admin")
+                        {
+                            $location.path('/newFeeds');
+                        }
+                        else
+                            $location.path('/admin');
+                    }
+                }
+            })
+        .when("/newFeeds",
+            {
+                templateUrl: "partials/newFeeds.html",
+                controller: "newFeedsCtrl",
+                controllerAs: "newFeeds"
             })
 })
     .run(function ($location, $timeout, $rootScope) {
@@ -45,7 +62,7 @@ angular.module("forum").config(function($routeProvider){
             },50)
             else
                 $timeout(function (){
-                    $location.path('/home');
+                    $location.path('/newFeeds');
                     $rootScope.showNav = true;
                 },50)
         }

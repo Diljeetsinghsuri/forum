@@ -1,0 +1,26 @@
+<div class="col-sm-12 col-md-12 col-lg-12">
+    <div class="panel-group">
+        <div class="panel-body post" ng-repeat="post in newFeeds.posts | reverse">
+            <div class="row subject-title">{{post.attributes.subject.attributes.name}}</div>
+            <div class="row" style="background-color: white">
+                <div class="col-xs-1 col-sm-1">
+                    <img src='img/avatar_dummy.png' alt="Profile Picture" class="img-responsive img-rounded img-post-profile">
+                </div>
+                <div class="col-xs-11 col-sm-11">
+                    <span><strong>{{post.attributes.user.attributes.name}}</strong></span>
+                    <small class="pull-right">{{post.attributes.updatedAt | date:'medium'}}</small>
+                    <hr class="small-margin-top my-hr" style="border: solid 2px #45B39D"></hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-10 col-xs-offset-1"> {{post.attributes.data}}</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-10 col-xs-offset-1"> <img class="img-responsive feed-img" ng-src="{{post.attributes.image._url}}"></div>
+            </div>
+            <div class="row">
+                <div class="panel-heading col-xs-10 col-xs-offset-1" style="margin-bottom: 5px; margin-top: 5px;"> <a ng-click="newFeeds.likePost(post)"><span class="glyphicon-thumbs-up glyphicon"></span></a><div class="likes-div">{{post.attributes.likesTotal}}</div></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,7 @@ function adminCtrl($timeout) {
     admin.divId = [];
     admin.subjects=[];
     admin.newPosts=[];
+    admin.usersList =[];
     admin.textClass="";
     admin.loadId = false;
     var Subject = Parse.Object.extend("Subject");
@@ -36,11 +37,30 @@ function adminCtrl($timeout) {
     query.find({
         success: function(results) {
             $timeout(function () {
-                admin.newPosts = results ;
-                console.log(results);
-                console.log(admin.newPosts);
-                for(i=0;i<admin.newPosts.length;i++)
-                    console.log(admin.newPosts[i].attributes)
+                admin.newPosts = results;
+                var UserData = Parse.Object.extend("Userdata");
+                var query = new Parse.Query(UserData);
+                query.include("user")
+                query.find({
+                    success: function (result) {
+                        console.log(result)
+                        admin.usersList = result
+                        for (var i = 0; i < admin.newPosts.length; i++) {
+                            for (var j = 0; j < admin.usersList.length; j++) {
+                                //console.log(admin.newPosts[i].get("user"));
+                                if (admin.newPosts[i].get("user").id === admin.usersList[j].get("user").id) {
+                                    admin.newPosts[i].email = admin.usersList[j].get("email");
+                                    console.log("found email",admin.usersList[j].get("email"));
+                                    console.log(admin.newPosts[i].get("likes"))
+                                }
+                            }
+                        }
+                        $timeout(function(){console.log(admin.newPosts)},10)
+                    },
+                    error: function(err){
+                        console.log(err);
+                    }
+                })
             },50);
 
 
@@ -49,6 +69,7 @@ function adminCtrl($timeout) {
             alert("Error: " + error.code + " " + error.message);
         }
     });
+   
 
 
     admin.reply = function (post) {

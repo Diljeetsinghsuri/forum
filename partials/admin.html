@@ -9,12 +9,13 @@
                     <label for="file">File</label> <input id="file" ngf-select="admin.uploadAttach()" ng-model="admin.attach" type="file" name="study-mat" ng-class="admin.class3" class="form-control">
                     <label for="subject">Subject</label>
                     <select id="subject" ng-model="admin.subject" ng-class="admin.class2" class="form-control">
+                        <option value="" selected disabled>Select</option>
                         <option ng-repeat="sub in admin.subjects" ng-value="sub">{{sub.attributes.name}}</option>
                     </select>
                     <div class="col-xs-offset-1 col-xs-1">
                         <p ng-show="admin.loadId"><img src="loading.gif" alt="loading" style="max-width: 50px; max-height: 50px"></p>
                     </div>
-                    <button class="btn post-btn pull-right" ng-disabled="admin.loadId" ng-click="admin.uploadFile(admin.subject)">Upload</button>
+                    <button class="btn post-btn pull-right" style="margin-top: 3%;" ng-disabled="admin.loadId" ng-click="admin.uploadFile(admin.subject)">Upload</button>
                 </form>
             </div>
         </div>
@@ -42,14 +43,14 @@
                 </div>
                 <div class="row"><div class="col-xs-10 col-xs-offset-1"> {{post.attributes.data}}</div></div>
                 <div class="row"><div class="col-xs-10 col-xs-offset-1"> <img class="img-responsive feed-img" ng-src="{{post.attributes.image._url}}"></div></div>
-                <div class="row"><div class="panel-heading col-xs-10 col-xs-offset-1" style="margin-bottom: 5px; margin-top: 5px;"> <a><span class="glyphicon-thumbs-up glyphicon"></span></a></div></div>
-                <div class="col-xs-offset-2 col-xs-8 form-group {{post.id}}" ng-hide="admin.divId[post.id] == post.id">
+                <div class="row padding-sides"><div class="panel-heading col-xs-10 col-xs-offset-1" style="margin-bottom: 5px; margin-top: 5px;"> <a><span class="glyphicon-thumbs-up glyphicon"></span></a><div class="likes-div">{{post.attributes.likesTotal}}</div></div></div>
+                <div class="row"><div class="col-xs-offset-1 col-xs-10 form-group {{post.id}}" ng-hide="admin.divId[post.id] == post.id">
                     <div class="email-to-reply"><label>{{post.email}}</label></div>
                     <form name="reply-form">
                         <textarea ng-class="admin.textClass" class="form-control" ng-model="admin.replyQuery[post.id]" name="{{post.id}}"></textarea>
                         <button class="btn logout-btn pull-right" ng-click="admin.reply(post)">Reply</button>
                     </form>
-                </div>
+                </div></div>
                 <div class="col-xs-offset-2 col-xs-8 form-group {{post.id}}" ng-show="admin.divId[post.id] == post.id">
                     <p><img src="success.gif" alt="success" style="max-width: 50px; max-height: 50px">Replied Successfully !!!!! </p>
                 </div>

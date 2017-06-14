@@ -135,6 +135,9 @@ hr.my-hr{
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.36);
+    top: 0;
+    position: fixed;
+    overflow: auto;
 }
 .login-btn{
     background: #45B39D !important;
@@ -166,4 +169,7 @@ hr.my-hr{
     div.title{
         position: relative !important;
     }
+}
+.padding-sides{
+        padding: 0 20px;
 }

@@ -64,7 +64,11 @@
 			</div>
 				<div class="row"><div class="col-xs-10 col-xs-offset-1"> {{post.attributes.data}}</div></div>
 				<div class="row"><div class="col-xs-10 col-xs-offset-1"> <img class="img-responsive feed-img" ng-src="{{post.attributes.image._url}}"></div></div>
-				<div class="row" style="margin-top: 10px;"><div class="panel-heading col-xs-10 col-xs-offset-1" ng-class="data.likeClass[post.id]"> <a ng-click="data.likePost(post)"><span class="glyphicon-thumbs-up glyphicon"></span></a><div class="likes-div">{{post.attributes.likesTotal}}</div></div></div>
+				<div class="row" style="margin-top: 10px;"><div class="panel-heading col-xs-10 col-xs-offset-1" ng-class="data.likeClass[post.id]"> 
+					<a ng-click="data.likePost(post)" ng-if="data.user.attributes.username != 'admin'"><span class="glyphicon-thumbs-up glyphicon"></span></a>
+					<a ng-if="data.user.attributes.username == 'admin'"><span class="glyphicon-thumbs-up glyphicon"></span></a>
+					<div class="likes-div">{{post.attributes.likesTotal}}</div>
+					</div></div>
 			</div>
 			</div>
 

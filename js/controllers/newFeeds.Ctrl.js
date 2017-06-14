@@ -2,6 +2,7 @@ angular.module("forum").controller("newFeedsCtrl",newFeedsCtrl)
 
 function newFeedsCtrl($timeout){
     var newFeeds = this;
+    newFeeds.user = Parse.User.current();
     newFeeds.posts = [];
     newFeeds.getData = function(num){
         var Post = Parse.Object.extend("Post");

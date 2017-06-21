@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>login</title>
+<title>Gate QA</title>
 <link href="css/business-casual.css" rel="stylesheet">
 <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
 
@@ -59,25 +59,27 @@
         </div>
         <div id="navbarCollapse" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li>
-                    <a href="#!/newFeeds">New Feeds</a>
+                <li ng-class="{'nav-selected':selectedNav=='feeds'}">
+                    <a href="#!/newFeeds" ng-click="selectedNav='feeds'">New Feeds</a>
                 </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle"  data-toggle="dropdown">Common
+                <li class="dropdown" ng-class="{'nav-selected':selectedNav=='common'}" >
+                    <a class="dropdown-toggle"
+                     ng-click="selectedNav='common'"
+                     data-toggle="dropdown">Common
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li ng-repeat="sub in nav.subCom"><a ng-click="nav.selectSub(sub)">{{sub.attributes.name}}</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a class=" dropdown-toggle" data-toggle="dropdown">ECE
+                <li class="dropdown" ng-class="{'nav-selected':selectedNav=='ece'}">
+                    <a class=" dropdown-toggle" ng-click="selectedNav='ece'" data-toggle="dropdown">ECE
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li ng-repeat="sub in nav.subEce"><a ng-click="nav.selectSub(sub)">{{sub.attributes.name}}</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a class=" dropdown-toggle"  data-toggle="dropdown">EE
+                <li class="dropdown" ng-class="{'nav-selected':selectedNav=='ee'}">
+                    <a class=" dropdown-toggle" ng-click="selectedNav='ee'" data-toggle="dropdown">EE
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li ng-repeat="sub in nav.subEe"><a ng-click="nav.selectSub(sub)">{{sub.attributes.name}}</a></li>

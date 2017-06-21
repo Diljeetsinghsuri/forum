@@ -181,3 +181,7 @@ hr.my-hr{
     box-shadow: none;
     border: none;
 }
+.modal-body.form-group{
+    background: white;
+    margin: auto;
+}

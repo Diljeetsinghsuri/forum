@@ -29,23 +29,22 @@
 				</div>
 			</div>
             <div class="panel-body post" ng-repeat="post in admin.newPosts | reverse">
-                <div class="row subject-title">{{post.attributes.subject.attributes.name}}</div>
+                <div class="row subject-title">{{post.attributes.subject.attributes.name|capitalize}}</div>
                 <div class="row"  style="background-color: white">
-                    <div class="col-xs-1 col-sm-1">
+                    <div class="col-xs-2 col-sm-2">
                         <img src='img/avatar_dummy.png'
-                             alt="Profile Picture" class="img-responsive img-rounded img-post-profile">
+                             alt="Profile Picture" class="img-responsive img-rounded img-post-profile margin-auto">
                     </div>
-                    <div class="col-xs-10 col-sm-11">
-                        <span><strong>{{post.attributes.user.attributes.name}}</strong></span>
+                    <div class="col-xs-10 col-sm-10 border-bottom-gray padding-bottom-10">
+                        <span><strong>{{post.attributes.user.attributes.name|capitalize}}</strong></span>
                         <small class="pull-right">{{post.attributes.updatedAt | date:'medium'}}</small>
-                        <hr class="small-margin-top my-hr" style="border: solid 2px #45B39D"></hr>
                     </div>
                 </div>
-                <div class="row"><div class="col-xs-10 col-xs-offset-1"> {{post.attributes.data}}</div></div>
-                <div class="row"><div class="col-xs-10 col-xs-offset-1"> <img class="img-responsive feed-img" ng-src="{{post.attributes.image._url}}" ng-click = "admin.openLightBox(post.attributes.image._url)"></div></div>
-                <div class="row padding-sides"><div class="panel-heading col-xs-10 col-xs-offset-1" style="margin-bottom: 5px; margin-top: 5px;"> <a><span class="glyphicon-thumbs-up glyphicon"></span></a><div class="likes-div">{{post.attributes.likesTotal}}</div></div></div>
-                <div class="row"><div class="col-xs-offset-1 col-xs-10 form-group {{post.id}}" ng-hide="admin.divId[post.id] == post.id">
-                    <div class="email-to-reply"><label>{{post.email}}</label></div>
+                <div class="row"><div class="col-xs-10 col-xs-offset-2"> {{post.attributes.data| capitalizeFirstWord}}</div></div>
+                <div class="row"><div class="col-xs-10 col-xs-offset-2"> <img class="img-responsive feed-img" ng-src="{{post.attributes.image._url}}" ng-click = "admin.openLightBox(post.attributes.image._url)"></div></div>
+                <div class="row padding-sides"><div class="panel-heading col-xs-10 col-xs-offset-2" style="margin-bottom: 5px; margin-top: 5px;"> <a><span class="glyphicon-thumbs-up glyphicon"></span></a><div class="likes-div">{{post.attributes.likesTotal}}</div></div></div>
+                <div class="row"><div class="col-xs-offset-2 col-xs-10 form-group {{post.id}}" ng-hide="admin.divId[post.id] == post.id">
+                    <div class="email-to-reply">Reply to <span class="bold"> {{post.email}}</span></div>
                     <form name="reply-form">
                         <textarea ng-class="admin.textClass" class="form-control" ng-model="admin.replyQuery[post.id]" name="{{post.id}}"></textarea>
                         <button class="btn logout-btn pull-right" ng-click="admin.reply(post)">Reply</button>

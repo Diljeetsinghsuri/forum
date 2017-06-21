@@ -1,7 +1,8 @@
 /**
  * Created by Diljeet on 17-02-2017.
  */
-angular.module("forum").service("dataService",function ($localForage) {
+angular.module("forum")
+.service("dataService",function ($localForage) {
     var dataServe =this ;
     dataServe.currSub = {};
     dataServe.users =[];

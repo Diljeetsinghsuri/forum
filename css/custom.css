@@ -30,7 +30,8 @@ body div.container.main-content
 {
     background-color: white;
     margin-bottom: 20px;
-    box-shadow:0px 0px 2px 1px;
+    box-shadow: 1px 1px 5px #aaa;
+    border-radius: 5px;
     /*border: 2px solid white;*/
 }
 .post:hover,body ng-view .row .col-sm-4 .attach:hover
@@ -69,6 +70,9 @@ ng-view .row .col-sm-4 .attach
     box-shadow:0px 0px 10px 2px grey;
     transition: border-color cubic-bezier(0.4, 0, 1, 1) 0.5s,box-shadow cubic-bezier(0.4, 0, 1, 1) 0.5s;
 }
+.panel-default{
+     min-width: 21% !important;
+}
 
 ng-view .row .col-sm-4 .panel-default .attach-head
 {
@@ -76,6 +80,7 @@ ng-view .row .col-sm-4 .panel-default .attach-head
     color:white !important;
     border: 2px solid #45B39D;
     border-bottom: none;
+   
 }
 .attach-body
 {
@@ -113,10 +118,12 @@ hr.my-hr{
     margin: auto;
 }
 .change-body-bg{
-    background: honeydew !important;
+    background: #f7f7f7 !important;
 }
 .main-content .panel-group .panel-heading{
-        box-shadow: 0px 0px 2px 0px;
+        /*box-shadow: 0px 0px 2px 0px;*/
+            padding-bottom: 0;
+    padding-left: 13px;
 }
 .likes-div{
         display: inline;
@@ -186,5 +193,30 @@ hr.my-hr{
 }
 .nav-selected, .nav-selected a{
     background: #45b39d;
-    color: white !important;
+    color: white!important;
+}
+.nav-selected, .nav-selected a:hover{
+    color: black !important;
+}
+.like-block{
+    box-shadow: 0px 0px 4px #888;
+    display: inline-block;
+    padding: 10px;
+    width: 45px;
+    border-radius: 50%;
+    height: 45px;
+    cursor: pointer;
+}
+.like-block:hover{
+    box-shadow: 0px 0px 10px #888;
+}
+.like-icon{
+    margin-left: 5px;
+    top:4px !important;
+}
+.modal-dialog{
+    margin-top: 0!important;
+}
+.clickable{
+    cursor: pointer;
 }

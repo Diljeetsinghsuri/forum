@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gate QA</title>
+<title>GATE QA</title>
 <link href="css/business-casual.css" rel="stylesheet">
 <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
-
+<link rel="icon" href="img/favicon.png" type="image/png" sizes="16x16">
 <link rel="stylesheet" href="lib/bootstrap-social/bootstrap-social.css" />
 <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css" />
 <link rel="stylesheet" href="css/standard.css"/>
@@ -36,9 +36,11 @@
 <script src="js/controllers/newFeeds.Ctrl.js"></script>
 <script src="js/controllers/lightbox.Ctrl.js"></script>
 <script src="js/filters/reverse.Filter.js"></script>
+<script src="js/filters/category.Filter.js"></script>
+
 </head>
 
-<body ng-controller="navCtrl as nav" ng-class="showNav ? 'change-body-bg' :''">
+<body ng-controller="navCtrl as nav" ng-class="showNav ? 'change-body-bg' :''" class="roboto-regular">
     <div ng-class="showNav ? '' :'overlay-div'">
 
 <div id="fb-root"></div>
@@ -61,43 +63,47 @@
         </div>
         <div id="navbarCollapse" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li ng-class="{'nav-selected':selectedNav=='feeds'}">
+                <li ng-class="{'nav-selected':selectedNav=='feeds'}" class="clickable">
                     <a href="#!/newFeeds" ng-click="selectedNav='feeds'">New Feeds</a>
                 </li>
-                <li class="dropdown" ng-class="{'nav-selected':selectedNav=='common'}" >
+                <li class="dropdown clickable" ng-class="{'nav-selected':selectedNav=='common'}" >
                     <a class="dropdown-toggle"
                      ng-click="selectedNav='common'"
                      data-toggle="dropdown">Common
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li ng-repeat="sub in nav.subCom"><a ng-click="nav.selectSub(sub)">{{sub.attributes.name}}</a></li>
+                        <li ng-repeat="sub in nav.subCom">
+                            <a class="clickable" ng-click="nav.selectSub(sub)">{{sub.attributes.name}}</a></li>
                     </ul>
                 </li>
-                <li class="dropdown" ng-class="{'nav-selected':selectedNav=='ece'}">
+                <li class="dropdown clickable" ng-class="{'nav-selected':selectedNav=='ece'}">
                     <a class=" dropdown-toggle" ng-click="selectedNav='ece'" data-toggle="dropdown">ECE
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li ng-repeat="sub in nav.subEce"><a ng-click="nav.selectSub(sub)">{{sub.attributes.name}}</a></li>
+                        <li ng-repeat="sub in nav.subEce">
+                            <a class="clickable" ng-click="nav.selectSub(sub)">{{sub.attributes.name}}</a></li>
                     </ul>
                 </li>
-                <li class="dropdown" ng-class="{'nav-selected':selectedNav=='ee'}">
+                <li class="dropdown clickable" ng-class="{'nav-selected':selectedNav=='ee'}">
                     <a class=" dropdown-toggle" ng-click="selectedNav='ee'" data-toggle="dropdown">EE
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li ng-repeat="sub in nav.subEe"><a ng-click="nav.selectSub(sub)">{{sub.attributes.name}}</a></li>
+                        <li ng-repeat="sub in nav.subEe">
+                            <a class="clickable"
+                            ng-click="nav.selectSub(sub)">{{sub.attributes.name}}</a></li>
                     </ul>
                 </li>
                 
             </ul>
             <div class="pull-right col-sm-2 btn dropdown" style="margin-top: 8px;" >
                 <a style="color: #45B39D;" class="dropdown-toggle" data-toggle = "dropdown">
-                    <span class="glyphicon glyphicon-user" style="margin-right: 10px;" ></span>{{currentUser.name}}
+                    <span class="glyphicon glyphicon-user" style="margin-right: 10px;" ></span>{{currentUser.name|capitalize}}
                     <span class="caret"></span> </a>
                 <ul class="dropdown-menu " style="background-color: black; color: #45B39D; margin-top: 8px; opacity: 0.85">
                     <li class="text-center" ng-if="currentUser.username != 'admin'"><a  style="color: #45B39D;" href="#!/home" > Profile</a></li>
                     <li class="text-center" ng-if="currentUser.username == 'admin'"><a  style="color: #45B39D;" href="#!/admin" > Home</a></li>
                     <!--<li class="text-center">Edit</li>-->
-                    <li class="text-center"><button class="btn logout-btn" ng-click="nav.logout()">LogOut</button></li>
+                    <li class="text-center"><button class="btn logout-btn" ng-click="nav.logout()">Logout</button></li>
                 </ul>
             </div>
         </div>

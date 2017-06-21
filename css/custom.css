@@ -145,6 +145,9 @@ hr.my-hr{
     font-size: large;
     font-weight: bold;
     transition: all .5s;
+    width: 25% !important;
+    margin: 0 auto !important;
+    display: block!important;
 }
 .login-btn a{
     color: white !important;

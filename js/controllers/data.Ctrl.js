@@ -3,7 +3,7 @@
  */
 angular.module("forum").controller("dataCtrl",dataCtrl)
 
-function dataCtrl($rootScope,$routeParams,dataService,$timeout) {
+function dataCtrl($rootScope,$routeParams,dataService,$timeout,$uibModal) {
     console.log("data is not working");
     var data = this ;
     data.user = Parse.User.current();
@@ -142,6 +142,26 @@ function dataCtrl($rootScope,$routeParams,dataService,$timeout) {
             }
         });
 
+    }
+    data.openLightBox = function (url) {
+        if(url){
+           var modalInstance = $uibModal.open({
+                                    animation: true,
+                                    ariaLabelledBy: 'modal-title',
+                                    ariaDescribedBy: 'modal-body',
+                                    templateUrl: 'partials/lightBox.html',
+                                    controller: 'lightboxCtrl',
+                                    controllerAs: 'lightbox',
+                                    backdrop: 'static', 
+                                    keyboard: true,
+                                    size: 'lg',
+                                    resolve: {
+                                        imageUrl: function () {
+                                            return url;
+                                        }
+                                    }
+           })
+        }
     }
     /*data.querys =[];
      (function (querys) {

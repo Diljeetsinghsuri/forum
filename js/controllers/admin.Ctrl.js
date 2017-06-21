@@ -3,7 +3,7 @@
  */
 angular.module("forum").controller("adminCtrl",adminCtrl)
 
-function adminCtrl($timeout) {
+function adminCtrl($timeout, $uibModal) {
     console.log("admin is working");
     var admin =this ;
     admin.divId = [];
@@ -38,7 +38,7 @@ function adminCtrl($timeout) {
         success: function(results) {
             $timeout(function () {
                 admin.newPosts = results;
-                var UserData = Parse.Object.extend("Userdata");
+                var UserData = Parse.Object.extend("UserData");
                 var query = new Parse.Query(UserData);
                 query.include("user")
                 query.find({
@@ -171,6 +171,27 @@ function adminCtrl($timeout) {
         }, function (error) {
             console.log(error);
         });
+    }
+
+    admin.openLightBox = function (url) {
+        if(url){
+           var modalInstance = $uibModal.open({
+                                    animation: true,
+                                    ariaLabelledBy: 'modal-title',
+                                    ariaDescribedBy: 'modal-body',
+                                    templateUrl: 'partials/lightBox.html',
+                                    controller: 'lightboxCtrl',
+                                    controllerAs: 'lightbox',
+                                    backdrop: 'static', 
+                                    keyboard: true,
+                                    size: 'lg',
+                                    resolve: {
+                                        imageUrl: function () {
+                                            return url;
+                                        }
+                                    }
+           })
+        }
     }
 
 }

@@ -173,3 +173,8 @@ hr.my-hr{
 .padding-sides{
         padding: 0 20px;
 }
+.modal-content{
+    background: transparent;
+    box-shadow: none;
+    border: none;
+}

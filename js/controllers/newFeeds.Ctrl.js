@@ -1,6 +1,6 @@
 angular.module("forum").controller("newFeedsCtrl",newFeedsCtrl)
 
-function newFeedsCtrl($timeout){
+function newFeedsCtrl($timeout, $uibModal){
     var newFeeds = this;
     newFeeds.user = Parse.User.current();
     newFeeds.posts = [];
@@ -9,6 +9,7 @@ function newFeedsCtrl($timeout){
         var query = new Parse.Query(Post);
         query.ascending("createdAt");
         query.include("subject");
+        query.include("user");
         query.find({
             success: function(results) {
                 $timeout(function () {
@@ -58,6 +59,27 @@ function newFeedsCtrl($timeout){
             }
         });
 
+    }
+
+    newFeeds.openLightBox = function (url) {
+        if(url){
+           var modalInstance = $uibModal.open({
+                                    animation: true,
+                                    ariaLabelledBy: 'modal-title',
+                                    ariaDescribedBy: 'modal-body',
+                                    templateUrl: 'partials/lightBox.html',
+                                    controller: 'lightboxCtrl',
+                                    controllerAs: 'lightbox',
+                                    backdrop: 'static', 
+                                    keyboard: true,
+                                    size: 'lg',
+                                    resolve: {
+                                        imageUrl: function () {
+                                            return url;
+                                        }
+                                    }
+           })
+        }
     }
 
 }

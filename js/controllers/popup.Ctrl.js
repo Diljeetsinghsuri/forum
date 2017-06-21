@@ -71,7 +71,7 @@ function popupCtrl($location,$uibModalInstance,$rootScope,dataService,$timeout,$
                 success: function(user) {
                     // Hooray! Let them use the app now.
                     var UserData = Parse.Object.extend("UserData");
-                    userData = new UserData();
+                    var userData = new UserData();
                     userData.set("email",popup.newuser.email);
                     userData.set("user",user);
                     userData.save(null,{
@@ -102,7 +102,7 @@ function popupCtrl($location,$uibModalInstance,$rootScope,dataService,$timeout,$
             user.save(null,{
                 success:function(success){
                     var UserData = Parse.Object.extend("UserData");
-                    userData = new UserData();
+                    var userData = new UserData();
                     userData.set("email",popup.curruser.email);
                     userData.set("user",user);
                     userData.save(null,{

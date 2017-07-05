@@ -1,13 +1,14 @@
-
 <div class="row">
 	<div class="col-sm-4 panel">
-		<div class="title" style="color: black; position: fixed;"><h3>{{data.menuName}}</h3></div>
-		<div class="panel-default attach" style="margin-top: 60px;" >
+		<div class="title" style="color: black; position: fixed;">
+			<h3>{{data.menuName}}</h3>
+		</div>
+		<div class="panel-default attach" style="margin-top: 60px;">
 			<div class="panel-heading attach-head">Study material</div>
-			<div class="panel-body attach-body" ng-if="!data.disAttach.length" >
-				there is no material yet
+			<div class="panel-body attach-body" ng-if="!data.disAttach.length">
+				There is no material yet
 			</div>
-			<div class="panel-body attach-body" ng-if="data.disAttach.length" >
+			<div class="panel-body attach-body" ng-if="data.disAttach.length">
 				<table class="table table-responsive">
 					<tr>
 						<th>Filename</th>
@@ -21,56 +22,67 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-8 panel-group">
-	<div class="panel-body post" ng-if="data.user.attributes.username != 'admin'">
-		<div class="col-xs-2 col-sm-2">
-					<img src='img/avatar_dummy.png'
-						 alt="Profile Picture" class="img-responsive img-rounded img-post-profile">
+	<div class="col-sm-8 panel-group" ng-if="data.user.attributes.username != 'admin'">
+		<div class="padding-10 gray">
+			<h3>Post a new query</h3>
 		</div>
-		<form name="form3">
-			<div class="form-group col-xs-10">
-				<div class="row">
-					<div class="col-xs-12  small-margin-bottom "><textarea ng-class="data.textClass" class="form-control" placeholder="Enter your Query" ng-model="data.query"></textarea></div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12 "><input class="form-control" ngf-select="data.uploadPostImage()" name="image"
-																  accept=".png, .jpg, .jpeg" ngf-max-size="2MB"
-																  ngf-model-invalid="data.errorFile" type="file" ng-model="data.attach" /></div>
-				</div>
+		<div class="panel-body post" ng-if="data.user.attributes.username != 'admin'">
+			<div class="col-xs-2 col-sm-2">
+				<img src='img/avatar_dummy.png' alt="Profile Picture" class="img-responsive img-rounded img-post-profile">
 			</div>
-		</form>
-		<div class="col-xs-offset-2 col-xs-3">
-			<p ng-show="data.divId"><img src="loading.gif" alt="loading" style="max-width: 50px; max-height: 50px"></p>
-			<p ng-show="data.divImg "><img ng-src="{{data.imgPath._url}}" alt="image" style="max-width: 50px; max-height: 50px"></p>
+			<form name="form3">
+				<div class="form-group col-xs-10">
+					<div class="row">
+						<div class="col-xs-12  small-margin-bottom "><textarea ng-class="data.textClass" class="form-control" placeholder="Enter your Query" ng-model="data.query"></textarea></div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 "><input class="form-control" ngf-select="data.uploadPostImage()" name="image" accept=".png, .jpg, .jpeg" ngf-max-size="2MB"
+							 ngf-model-invalid="data.errorFile" type="file" ng-model="data.attach" /></div>
+					</div>
+				</div>
+			</form>
+			<div class="col-xs-offset-2 col-xs-3">
+				<p ng-show="data.divId"><img src="loading.gif" alt="loading" style="max-width: 50px; max-height: 50px"></p>
+				<p ng-show="data.divImg "><img ng-src="{{data.imgPath._url}}" alt="image" style="max-width: 50px; max-height: 50px"></p>
+			</div>
+			<div class="panel-default pull-right"><input class="btn post-btn" type="button" ng-disabled="data.divId" ng-click="data.postQuery()" value="Post"></div>
 		</div>
-		<div class="panel-default pull-right"><input class="btn post-btn" type="button" ng-disabled="data.divId" ng-click="data.postQuery()" value="Post"></div>
-	</div>
-			<div class="panel-body post" ng-if="!data.disPost.length">
-				<div class="row"  style="background-color: white;padding: 10px 30px;">
-					There is no query posted yet
+		<div class="padding-10 gray">
+			<h3>Previous Queries</h3>
+		</div>
+		<div class="panel-body post" ng-if="!data.disPost.length">
+			<div class="row" style="background-color: white;padding: 10px 30px;">
+				There is no query posted yet
+			</div>
+		</div>
+		<div class="panel-body post" ng-repeat="post in data.disPost | reverse" ng-if="data.disPost.length">
+			<div class="row" style="background-color: white">
+				<div class="col-xs-1 col-sm-2 text-center">
+					<img src='img/avatar_dummy.png' alt="Profile Picture" class="img-responsive img-rounded img-post-profile margin-auto">
+				</div>
+				<div class="col-xs-10 col-sm-10 border-bottom-gray padding-bottom-10">
+					<span><strong>{{post.attributes.user.attributes.name |capitalize}}</strong></span>
+					<small class="pull-right gray">{{post.attributes.createdAt | date:'medium'}}</small>
 				</div>
 			</div>
-			<div class="panel-body post" ng-repeat="post in data.disPost | reverse" ng-if="data.disPost.length">
-			<div class="row"  style="background-color: white">
-				<div class="col-xs-1 col-sm-2">
-					<img src='img/avatar_dummy.png'
-						 alt="Profile Picture" class="img-responsive img-rounded img-post-profile">
-				</div>
-				<div class="col-xs-11 col-sm-10">
-					<span><strong>{{post.attributes.user.attributes.name}}</strong></span>
-					<small class="pull-right">{{post.attributes.createdAt | date:'medium'}}</small>
-					<hr class="small-margin-top my-hr" style="border: solid 2px #45B39D"></hr>
-				</div>
+			<div class="row">
+				<div class="col-xs-10 col-xs-offset-2"> {{post.attributes.data| capitalizeFirstWord}}</div>
 			</div>
-				<div class="row"><div class="col-xs-10 col-xs-offset-1"> {{post.attributes.data}}</div></div>
-				<div class="row"><div class="col-xs-10 col-xs-offset-1"> <img class="img-responsive feed-img" ng-src="{{post.attributes.image._url}}" ng-click="data.openLightBox(post.attributes.image._url)"></div></div>
-				<div class="row" style="margin-top: 10px;"><div class="panel-heading col-xs-10 col-xs-offset-1" ng-class="data.likeClass[post.id]"> 
-					<a ng-click="data.likePost(post)" ng-if="data.user.attributes.username != 'admin'"><span class="glyphicon-thumbs-up glyphicon"></span></a>
-					<a ng-if="data.user.attributes.username == 'admin'"><span class="glyphicon-thumbs-up glyphicon"></span></a>
-					<div class="likes-div">{{post.attributes.likesTotal}}</div>
-					</div></div>
+			<div class="row">
+				<div class="col-xs-10 col-xs-offset-2"> <img class="img-responsive feed-img" ng-src="{{post.attributes.image._url}}" ng-click="data.openLightBox(post.attributes.image._url)"></div>
 			</div>
-			</div>
+			<div class="row" style="margin-top: 10px;">
+				<div class="panel-heading col-xs-10 col-xs-offset-2" ng-class="data.likeClass[post.id]">
+					<div class="like-block">
+						<a ng-click="data.likePost(post)" ng-if="data.user.attributes.username != 'admin'"><span class="glyphicon-thumbs-up glyphicon like-icon text-large"></span></a>
+						<a ng-if="data.user.attributes.username == 'admin'"><span class="glyphicon-thumbs-up glyphicon like-icon text-large"></span></a>
+					</div>
+					<div class="likes-div text-large">{{post.attributes.likesTotal}}</div>
 
+				</div>
+			</div>
 		</div>
 	</div>
+
+</div>
+</div>

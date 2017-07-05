@@ -71,4 +71,5 @@ angular.module("forum").config(function($routeProvider){
             $rootScope.aboutUs = true;
             $location.path('/');
         }
+        $rootScope.selectedNav = 'feeds';
     })

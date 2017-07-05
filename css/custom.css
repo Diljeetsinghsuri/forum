@@ -185,3 +185,51 @@ hr.my-hr{
     background: white;
     margin: auto;
 }
+
+img.img-responsive.comment-img {
+    width: 30px;
+    display: inline;
+}
+span.comment-user {
+    /* margin-top: 9px; */
+    display: inline;
+}
+.comment-text.row {
+    margin-left: 50px;
+}
+textarea.comment-add {
+    height: 50px;
+    width: 100%;
+}
+.col-sm-2.custom-padding-0 , .col-sm-11.custom-padding-0, .padding-0{
+    padding: 0px !important;
+}
+.comment-container {
+    padding: 10px 30px;
+    /* border: solid 1px; */
+    background: #dff0d8;
+    box-shadow: 0px 0px 1px 0px;
+}
+.add-comment-container {
+    padding: 10px;
+}
+.comment-box.row {
+    padding: 10px;
+    border-bottom: 1px solid gainsboro;
+}
+.comment-details {
+    display: inline;
+}
+.row.action-container {
+    padding-top: 10px;
+}
+.padding-right-10{
+    padding-right:10px !important;
+}
+.right{
+    float: right !important;
+}
+span.comment-text {
+    padding-left: 10%;
+    line-height: 0.5;
+}

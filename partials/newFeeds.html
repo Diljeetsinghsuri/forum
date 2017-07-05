@@ -19,10 +19,36 @@
                 <div class="col-xs-10 col-xs-offset-1"> <img class="img-responsive feed-img" ng-src="{{post.attributes.image._url}}" ng-click="newFeeds.openLightBox(post.attributes.image._url)"></div>
             </div>
             <div class="row">
-                <div class="panel-heading col-xs-10 col-xs-offset-1" style="margin-bottom: 5px; margin-top: 5px;"> 
+                <div class="panel-heading col-xs-10 col-xs-offset-1" style="margin-bottom: 0px; margin-top: 5px;"> 
                     <a ng-click="newFeeds.likePost(post)" ng-if="newFeeds.user.attributes.username != 'admin'"><span class="glyphicon-thumbs-up glyphicon"></span></a>
                     <a ng-if="newFeeds.user.attributes.username == 'admin'"><span class="glyphicon-thumbs-up glyphicon"></span></a>
                     <div class="likes-div">{{post.attributes.likesTotal}}</div></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-10 col-xs-offset-1 padding-0">
+                    <div class="comment-container" >
+                        <div class="comment-div" ng-repeat="comment in post.comments track by $index">
+                            <div class="comment-box row"><img src="img/avatar_dummy.png" alt="" class="img-responsive comment-img">
+                                <div class="comment-details">
+                                    <span class="comment-user "><strong>{{comment.attributes.user.attributes.name}}</strong></span>
+                                    <br>
+                                    <span class="comment-text ">{{comment.attributes.comment}}</span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="add-comment-container ">
+                            <div class="comment-box row comment-input"><div class="img-div col-xs-2 col-sm-1 custom-padding-0 padding-right-10 "><img src="img/avatar_dummy.png" alt="" class="img-responsive comment-img right"></div>
+                                <div class="textarea-div col-sm-11 col-xs-10 custom-padding-0"><textarea ng-model="newFeeds.newComment" id="" cols="30" rows="10" class="comment-add"></textarea></div>
+                            </div>
+                            <div class="row action-container">
+                            <button class="reply-btn right" ng-click="newFeeds.postComment(post)">Reply</button>
+                        </div>
+                        </div>
+                        
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>

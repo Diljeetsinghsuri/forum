@@ -193,12 +193,13 @@ hr.my-hr{
 }
 
 img.img-responsive.comment-img {
-    width: 30px;
-    display: inline;
+    width: 40px;
+    /*display: inline;*/
+    height: 40px
 }
 span.comment-user {
     /* margin-top: 9px; */
-    display: inline;
+    /*display: inline;*/
 }
 .comment-text.row {
     margin-left: 50px;
@@ -225,6 +226,7 @@ textarea.comment-add {
 }
 .comment-details {
     display: inline;
+    padding-left: 10px;
 }
 .row.action-container {
     padding-top: 10px;
@@ -236,8 +238,7 @@ textarea.comment-add {
     float: right !important;
 }
 span.comment-text {
-    padding-left: 10%;
-    line-height: 0.5;
+        padding-left: 10px
 }
 .nav-selected, .nav-selected a{
     background: #45b39d;
@@ -268,3 +269,23 @@ span.comment-text {
 .clickable{
     cursor: pointer;
 }
+@media only screen and (min-width: 561px) {
+    .textarea-div {
+        width: 88% !important;
+    }
+    
+}
+
+.img-div{
+    display: inline;
+    float:left;
+}
+.textarea-div{
+        padding-left: 15px;
+    /* display: inline; */
+    float: left;
+    width: 75%;
+}
+.action-container {
+        padding-left: 65px ;
+    }

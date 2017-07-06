@@ -59,5 +59,6 @@ function navCtrl($rootScope, $location, $timeout, dataService) {
     nav.selectSub = function (currSub) {
         dataService.currSub = currSub;
         $location.path('/data/' + currSub.id);
+        $("#navbarCollapse").collapse('hide');
     }
 }

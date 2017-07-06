@@ -192,7 +192,8 @@ function dataCtrl($rootScope,$routeParams,dataService,$timeout,$uibModal) {
     }
 
     data.postComment = function(post){
-        if(data.newComment){
+        var newCommentStr = "newComment_" + post.id;
+        if(data[newCommentStr]){
         // var commentBlockUI = blockUI.instances.get('commentBlockUI'+post.id);
         // commentBlockUI.start("posting comment...");
         var Comment = Parse.Object.extend("Comment");
@@ -200,13 +201,13 @@ function dataCtrl($rootScope,$routeParams,dataService,$timeout,$uibModal) {
 
             comment.set("user", Parse.User.current());
             comment.set("post", post);
-            comment.set("comment", data.newComment );
+            comment.set("comment", data[newCommentStr] );
             comment.save(null, {
                 success: function(result) {
                     $timeout(function () {
                         post.comments.push(result);
                         // commentBlockUI.stop();
-                        data.newComment = "";
+                        data[newCommentStr] = "";
                     })
                 },
                 error: function(post, error) {

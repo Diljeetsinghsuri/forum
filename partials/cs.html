@@ -98,7 +98,7 @@
                         </div>
                         <div class="add-comment-container ">
                             <div class="comment-box row comment-input"><div class="img-div custom-padding-0 "><img src="img/avatar_dummy.png" alt="" class="img-rounded img-responsive comment-img right"></div>
-                                <div class="textarea-div main-page custom-padding-0"><textarea ng-model="data.newComment" id="" cols="30" rows="10" class="comment-add"></textarea></div>
+                                <div class="textarea-div main-page custom-padding-0"><textarea ng-model="data['newComment_'+post.id]" id="" cols="30" rows="10" class="comment-add"></textarea></div>
                             </div>
                             <div class="row action-container">
                             <button class="reply-btn btn post-btn" ng-click="data.postComment(post)">Reply</button>

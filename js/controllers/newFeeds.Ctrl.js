@@ -108,21 +108,22 @@ function newFeedsCtrl($timeout, $uibModal) {
     }
 
     newFeeds.postComment = function(post){
-        if(newFeeds.newComment){
+        var newCommentStr = "newComment_" + post.id;
+        if(newFeeds[newCommentStr]){
         // var commentBlockUI = blockUI.instances.get('commentBlockUI'+post.id);
         // commentBlockUI.start("posting comment...");
         var Comment = Parse.Object.extend("Comment");
             var comment = new Comment();
-
+            
             comment.set("user", Parse.User.current());
             comment.set("post", post);
-            comment.set("comment", newFeeds.newComment );
+            comment.set("comment", newFeeds[newCommentStr] );
             comment.save(null, {
                 success: function(result) {
                     $timeout(function () {
                         post.comments.push(result);
                         // commentBlockUI.stop();
-                        newFeeds.newComment = "";
+                        newFeeds[newCommentStr] = "";
                     })
                 },
                 error: function(post, error) {

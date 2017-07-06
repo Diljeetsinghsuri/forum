@@ -273,6 +273,9 @@ span.comment-text {
     .textarea-div {
         width: 88% !important;
     }
+    .main-page.textarea-div {
+        width: 85% !important;
+    }
     
 }
 

@@ -81,6 +81,34 @@
 
 				</div>
 			</div>
+			<div class="row">
+                <div class="col-xs-9 col-xs-offset-2 padding-0">
+                    <div class="comment-container" >
+                        <div class="comment-div" ng-repeat="comment in post.comments track by $index">
+                            <div class="comment-box row"><div class="img-div">
+                                <img src="img/avatar_dummy.png" alt="" class="img-responsive comment-img img-rounded">
+                                </div>
+                                <div class="comment-details">
+                                    <span class="comment-user "><strong>{{comment.attributes.user.attributes.name}}</strong></span>
+                                    <br>
+                                    <span class="comment-text ">{{comment.attributes.comment}}</span>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="add-comment-container ">
+                            <div class="comment-box row comment-input"><div class="img-div custom-padding-0 "><img src="img/avatar_dummy.png" alt="" class="img-rounded img-responsive comment-img right"></div>
+                                <div class="textarea-div main-page custom-padding-0"><textarea ng-model="data.newComment" id="" cols="30" rows="10" class="comment-add"></textarea></div>
+                            </div>
+                            <div class="row action-container">
+                            <button class="reply-btn btn post-btn" ng-click="data.postComment(post)">Reply</button>
+                        </div>
+                        </div>
+                        
+                    </div>
+
+                </div>
+            </div>
 		</div>
 	</div>
 

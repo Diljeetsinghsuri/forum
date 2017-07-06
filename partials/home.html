@@ -18,12 +18,16 @@
 		<div class="panel-heading">History</div>
 		<div class="panel-body">
 			<div class="panel" ng-repeat="activity in home.activities">
-				<a data-target="#data{{activity.id}}" data-toggle="collapse"><div class="panel-heading">
+				<a data-target="#data{{activity.id}}" data-toggle="collapse"><div class="panel-heading" ng-if="activity.className == 'Post'">
 					You posted a Query related to {{activity.attributes.subject.attributes.name}}
+				</div></a>
+				<a data-target="#data{{activity.id}}" data-toggle="collapse"><div class="panel-heading" ng-if="activity.className == 'Comment'">
+					You Comment on a Post 
 				</div></a>
 				<div id="data{{activity.id}}" class="collapse">
 					<div class="panel-body">
-					<p>{{activity.attributes.data}}</p>
+					<p ng-if="activity.className == 'Post'">{{activity.attributes.data}}</p>
+					<p ng-if="activity.className == 'Comment'">{{activity.attributes.comment}}</p>
 						</div>
 				</div>
 			</div>

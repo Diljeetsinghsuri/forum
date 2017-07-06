@@ -41,13 +41,40 @@ function dataCtrl($rootScope,$routeParams,dataService,$timeout,$uibModal) {
     query.include("user");
     query.find({
         success: function(results) {
-            $timeout(function () {
-                data.disPost = results ;
-                console.log(results);
-                console.log(data.disPost);
-                for(i=0;i<data.disPost.length;i++)
-                    console.log(data.disPost[i].attributes.user.attributes)
-            },50);
+             var Com = Parse.Object.extend("Comment");
+                var query2 = new Parse.Query(Com);
+                query.include("user");
+                query.include("post");
+                 query2.find({
+                     success: function(res){
+                         for(var i = 0; i<res.length;i++){
+                             loop1:
+                             for(var j=0; j<results.length; j++){
+                                 if(results[j].comments == undefined)
+                                 results[j].comments = [];
+                                 if(results[j].id == res[i].get('post').id){
+                                     results[j].comments.push(res[i]);
+                                     console.log(j)
+                                     break loop1;
+                                 }
+                             }
+                         }
+                         $timeout(function () {
+                             console.log(results);
+                             data.disPost = results;
+                         }, 50);
+                     },
+                     error: function(err){
+                         alert("err");
+                     }
+                 })
+            // $timeout(function () {
+            //     data.disPost = results ;
+            //     console.log(results);
+            //     console.log(data.disPost);
+            //     for(i=0;i<data.disPost.length;i++)
+            //         console.log(data.disPost[i].attributes.user.attributes)
+            // },50);
 
 
         },
@@ -163,6 +190,39 @@ function dataCtrl($rootScope,$routeParams,dataService,$timeout,$uibModal) {
            })
         }
     }
+
+    data.postComment = function(post){
+        if(data.newComment){
+        // var commentBlockUI = blockUI.instances.get('commentBlockUI'+post.id);
+        // commentBlockUI.start("posting comment...");
+        var Comment = Parse.Object.extend("Comment");
+            var comment = new Comment();
+
+            comment.set("user", Parse.User.current());
+            comment.set("post", post);
+            comment.set("comment", data.newComment );
+            comment.save(null, {
+                success: function(result) {
+                    $timeout(function () {
+                        post.comments.push(result);
+                        // commentBlockUI.stop();
+                        data.newComment = "";
+                    })
+                },
+                error: function(post, error) {
+                    alert('Failed to create new object, with error code: ' + error.message);
+                }
+            });
+        }
+        else{
+            alert("reply box is empty");
+        }
+     
+    }
+
+
+
+
     /*data.querys =[];
      (function (querys) {
      $localForage.getItem("querys").then(function (data) {

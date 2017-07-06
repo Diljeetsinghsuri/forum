@@ -16,19 +16,19 @@ function newFeedsCtrl($timeout, $uibModal) {
             success: function(results) {
                 var Com = Parse.Object.extend("Comment");
                 var query2 = new Parse.Query(Com);
-                query.include("user");
-                query.include("post");
+                query2.include("user");
+                query2.include("post");
                  query2.find({
                      success: function(res){
-                         for(var i = 0; i<res.length;i++){
-                             loop1:
-                             for(var j=0; j<results.length; j++){
-                                 if(results[j].comments == undefined)
-                                 results[j].comments = [];
-                                 if(results[j].id == res[i].get('post').id){
-                                     results[j].comments.push(res[i]);
+                         for(var i = 0; i<results.length;i++){
+                             
+                             for(var j=0; j<res.length; j++){
+                                 if(results[i].comments == undefined)
+                                 results[i].comments = [];
+                                 if(results[i].id == res[j].get('post').id){
+                                     results[i].comments.push(res[j]);
                                      console.log(j)
-                                     break loop1;
+                                     
                                  }
                              }
                          }

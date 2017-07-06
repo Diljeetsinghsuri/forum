@@ -117,7 +117,7 @@ function popupCtrl($location,$uibModalInstance,$rootScope,dataService,$timeout,$
                 error: function(error){
                     console.log(error)
                     if(error.code == 203){
-                        popup.msg = "User Already exsist with this email";
+                        $timeout(function(){popup.msg = "User Already exsist with this email";},50)
                     }
                 }
             })

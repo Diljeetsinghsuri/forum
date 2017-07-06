@@ -292,3 +292,15 @@ span.comment-text {
 .action-container {
         padding-left: 65px ;
     }
+.post-user-details{
+        margin-left: 70px;
+    padding-top: 10px;
+    padding-left: 0px;
+    margin-right: 20px;
+}
+.post-user-img{
+        width: 60px;
+    height: 60px;
+    padding: 5px;
+    float: left;
+}

@@ -57,10 +57,10 @@
 		</div>
 		<div class="panel-body post" ng-repeat="post in data.disPost | reverse" ng-if="data.disPost.length">
 			<div class="row" style="background-color: white">
-				<div class="col-xs-1 col-sm-2 text-center">
+				<div class="post-user-img">
 					<img src='img/avatar_dummy.png' alt="Profile Picture" class="img-responsive img-rounded img-post-profile margin-auto">
 				</div>
-				<div class="col-xs-10 col-sm-10 border-bottom-gray padding-bottom-10">
+				<div class="post-user-details border-bottom-gray padding-bottom-10">
 					<span><strong>{{post.attributes.user.attributes.name |capitalize}}</strong></span>
 					<small class="pull-right gray">{{post.attributes.createdAt | date:'medium'}}</small>
 				</div>

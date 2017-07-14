@@ -6,6 +6,7 @@ angular.module("forum")
     var dataServe =this ;
     dataServe.currSub = {};
     dataServe.users =[];
+    dataServe.currUser = Parse.User.current();
     (function (users) {
         $localForage.getItem("users").then(function (data) {
             console.log(data);

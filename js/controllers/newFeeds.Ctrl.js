@@ -1,11 +1,11 @@
 angular.module("forum").controller("newFeedsCtrl", newFeedsCtrl)
 
-function newFeedsCtrl($timeout, $uibModal) {
+function newFeedsCtrl($timeout, $uibModal, dataService) {
     var newFeeds = this;
-    newFeeds.user = Parse.User.current();
+    newFeeds.user = dataService.currUser;
     newFeeds.posts = [];
-    newFeeds.comments =[1,2];
-    newFeeds.getData = function(num){
+    newFeeds.comments = [1, 2];
+    newFeeds.getData = function (num) {
 
         var Post = Parse.Object.extend("Post");
         var query = new Parse.Query(Post);
@@ -13,34 +13,34 @@ function newFeedsCtrl($timeout, $uibModal) {
         query.include("subject");
         query.include("user");
         query.find({
-            success: function(results) {
+            success: function (results) {
                 var Com = Parse.Object.extend("Comment");
                 var query2 = new Parse.Query(Com);
                 query2.include("user");
                 query2.include("post");
-                 query2.find({
-                     success: function(res){
-                         for(var i = 0; i<results.length;i++){
-                             
-                             for(var j=0; j<res.length; j++){
-                                 if(results[i].comments == undefined)
-                                 results[i].comments = [];
-                                 if(results[i].id == res[j].get('post').id){
-                                     results[i].comments.push(res[j]);
-                                     console.log(j)
-                                     
-                                 }
-                             }
-                         }
-                         $timeout(function () {
-                             console.log(results);
-                             newFeeds.posts = results;
-                         }, 50);
-                     },
-                     error: function(err){
-                         alert("err");
-                     }
-                 })
+                query2.find({
+                    success: function (res) {
+                        for (var i = 0; i < results.length; i++) {
+
+                            for (var j = 0; j < res.length; j++) {
+                                if (results[i].comments == undefined)
+                                    results[i].comments = [];
+                                if (results[i].id == res[j].get('post').id) {
+                                    results[i].comments.push(res[j]);
+                                    console.log(j)
+
+                                }
+                            }
+                        }
+                        $timeout(function () {
+                            console.log(results);
+                            newFeeds.posts = results;
+                        }, 50);
+                    },
+                    error: function (err) {
+                        alert("err");
+                    }
+                })
 
 
 
@@ -107,34 +107,64 @@ function newFeedsCtrl($timeout, $uibModal) {
         }
     }
 
-    newFeeds.postComment = function(post){
+    newFeeds.postComment = function (post) {
         var newCommentStr = "newComment_" + post.id;
-        if(newFeeds[newCommentStr]){
-        // var commentBlockUI = blockUI.instances.get('commentBlockUI'+post.id);
-        // commentBlockUI.start("posting comment...");
-        var Comment = Parse.Object.extend("Comment");
+        if (newFeeds[newCommentStr]) {
+            // var commentBlockUI = blockUI.instances.get('commentBlockUI'+post.id);
+            // commentBlockUI.start("posting comment...");
+            var Comment = Parse.Object.extend("Comment");
             var comment = new Comment();
-            
+
             comment.set("user", Parse.User.current());
             comment.set("post", post);
-            comment.set("comment", newFeeds[newCommentStr] );
+            comment.set("comment", newFeeds[newCommentStr]);
             comment.save(null, {
-                success: function(result) {
+                success: function (result) {
                     $timeout(function () {
                         post.comments.push(result);
                         // commentBlockUI.stop();
                         newFeeds[newCommentStr] = "";
                     })
                 },
-                error: function(post, error) {
+                error: function (post, error) {
                     alert('Failed to create new object, with error code: ' + error.message);
                 }
             });
         }
-        else{
+        else {
             alert("reply box is empty");
         }
-     
+
+    }
+    newFeeds.deleteComment = function (comKey, postKey, comment, comments) {
+        // $('#'+comment.id).css('pointer-events', 'none');
+        var Comment = Parse.Object.extend("Comment");
+        var query = new Parse.Query(Comment);
+        query.get(comment.id, {
+            success: function (object) {
+                // The object was retrieved successfully.
+                object.destroy({
+                    success: function (myObject) {
+                        // The object was deleted from the Parse Cloud.
+                        $timeout(function () {
+                        comments.splice(comKey, 1);
+                            console.log("delete comment", myObject)
+                        }, 10)
+                    },
+                    error: function (myObject, error) {
+                        console.log("errorcomment", myObject)
+                        // The delete failed.
+                        // error is a Parse.Error with an error code and message.
+                    }
+                })
+            },
+            error: function (object, error) {
+                console.log("object not found");
+                // The object was not retrieved successfully.
+                // error is a Parse.Error with an error code and message.
+            }
+        });
+
     }
 
 }

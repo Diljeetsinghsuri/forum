@@ -4,7 +4,7 @@
 			<h3>All queries</h3>
             <p class="gray">You can ask queries on subject specific pages for Common, ECE and EE</p>
 		</div>
-        <div class="panel-body post" ng-repeat="post in newFeeds.posts | reverse">
+        <div class="panel-body post" ng-repeat="(postKey, post) in newFeeds.posts | reverse">
             <div class="row subject-title">{{post.attributes.subject.attributes.name}}</div>
             <div class="row" style="background-color: white">
                 <div class="post-user-img">
@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="col-xs-10 col-xs-offset-1 padding-0">
                     <div class="comment-container" >
-                        <div class="comment-div" ng-repeat="comment in post.comments track by $index">
+                        <div class="comment-div" ng-repeat="(comKey, comment) in post.comments track by $index">
                             <div class="comment-box row"><div class="img-div">
                                 <img src="img/avatar_dummy.png" alt="" class="img-responsive comment-img img-rounded">
                                 </div>
@@ -43,6 +43,9 @@
                                     <span class="comment-user "><strong>{{comment.attributes.user.attributes.name}}</strong></span>
                                     <br>
                                     <span class="comment-text ">{{comment.attributes.comment}}</span>
+                                </div>
+                                <div class="delete-comment right" ng-if="newFeeds.user.attributes.username == 'admin'">
+                                    <a class="delete-action" ng-click="newFeeds.deleteComment(comKey,postKey,comment, post.comments);" id="{{comment.id}}">Delete</a>
                                 </div>
                             </div>
                             

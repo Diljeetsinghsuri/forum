@@ -22,8 +22,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-8 panel-group" ng-if="data.user.attributes.username != 'admin'">
-		<div class="padding-10 gray">
+	<div class="col-sm-8 panel-group" >
+		<div class="padding-10 gray" ng-if="data.user.attributes.username != 'admin'">
 			<h3>Post a new query</h3>
 		</div>
 		<div class="panel-body post" ng-if="data.user.attributes.username != 'admin'">
@@ -93,7 +93,11 @@
                                     <br>
                                     <span class="comment-text ">{{comment.attributes.comment}}</span>
                                 </div>
+								<div class="delete-comment right" ng-if="data.user.attributes.username == 'admin'">
+                                    <a class="delete-action" ng-click="data.deleteComment(comKey,postKey,comment, post.comments);" id="{{comment.id}}">Delete</a>
+                                </div>
                             </div>
+							
                             
                         </div>
                         <div class="add-comment-container ">

@@ -16,12 +16,14 @@ function popupCtrl($location,$uibModalInstance,$rootScope,dataService,$timeout,$
                     console.log(user);
                     if(user.attributes.username == "admin")
                     {
+                        dataService.currUser = Parse.User.current()
                         $location.path("/admin");
                         $uibModalInstance.close();
                         $rootScope.showNav = true;
                     }
                     else
                     {
+                        dataService.currUser = Parse.User.current()
                         $location.path("/newFeeds");
                         $uibModalInstance.close();
                         $rootScope.showNav = true;

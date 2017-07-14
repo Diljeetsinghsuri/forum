@@ -6,7 +6,7 @@ angular.module("forum").controller("dataCtrl",dataCtrl)
 function dataCtrl($rootScope,$routeParams,dataService,$timeout,$uibModal) {
     console.log("data is not working");
     var data = this ;
-    data.user = Parse.User.current();
+    data.user = dataService.currUser;
     data.textClass ="";
     data.imgPath = "";
     data.divImg =false;
@@ -219,6 +219,38 @@ function dataCtrl($rootScope,$routeParams,dataService,$timeout,$uibModal) {
             alert("reply box is empty");
         }
      
+    }
+
+
+    data.deleteComment = function (comKey, postKey, comment, comments) {
+        // $('#'+comment.id).css('pointer-events', 'none');
+        var Comment = Parse.Object.extend("Comment");
+        var query = new Parse.Query(Comment);
+        query.get(comment.id, {
+            success: function (object) {
+                // The object was retrieved successfully.
+                object.destroy({
+                    success: function (myObject) {
+                        // The object was deleted from the Parse Cloud.
+                        $timeout(function () {
+                        comments.splice(comKey, 1);
+                            console.log("delete comment", myObject)
+                        }, 10)
+                    },
+                    error: function (myObject, error) {
+                        console.log("errorcomment", myObject)
+                        // The delete failed.
+                        // error is a Parse.Error with an error code and message.
+                    }
+                })
+            },
+            error: function (object, error) {
+                console.log("object not found");
+                // The object was not retrieved successfully.
+                // error is a Parse.Error with an error code and message.
+            }
+        });
+
     }
 
 

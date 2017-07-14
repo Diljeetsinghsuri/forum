@@ -3,7 +3,7 @@
  */
 angular.module("forum").controller("loginCtrl",loginCtrl)
 
-function loginCtrl($uibModal, $location, $rootScope, $timeout){
+function loginCtrl($uibModal, $location, $rootScope, $timeout, dataService){
 
     var login = this;
     login.profilepic = "#"
@@ -67,7 +67,9 @@ function loginCtrl($uibModal, $location, $rootScope, $timeout){
                                 }
                                 $timeout(function () {
                                     $rootScope.showNav = true ;
+                                    dataService.currUser = Parse.User.current();
                                     $location.path("/newFeeds");
+                                    
                                 },50)
                             });
                         }

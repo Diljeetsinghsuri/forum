@@ -138,32 +138,34 @@ function newFeedsCtrl($timeout, $uibModal, dataService) {
     }
     newFeeds.deleteComment = function (comKey, postKey, comment, comments) {
         // $('#'+comment.id).css('pointer-events', 'none');
-        var Comment = Parse.Object.extend("Comment");
-        var query = new Parse.Query(Comment);
-        query.get(comment.id, {
-            success: function (object) {
-                // The object was retrieved successfully.
-                object.destroy({
-                    success: function (myObject) {
-                        // The object was deleted from the Parse Cloud.
-                        $timeout(function () {
-                        comments.splice(comKey, 1);
-                            console.log("delete comment", myObject)
-                        }, 10)
-                    },
-                    error: function (myObject, error) {
-                        console.log("errorcomment", myObject)
-                        // The delete failed.
-                        // error is a Parse.Error with an error code and message.
-                    }
-                })
-            },
-            error: function (object, error) {
-                console.log("object not found");
-                // The object was not retrieved successfully.
-                // error is a Parse.Error with an error code and message.
-            }
-        });
+        if (confirm("Are you sure you want to delete this COMMENT ?")) {
+            var Comment = Parse.Object.extend("Comment");
+            var query = new Parse.Query(Comment);
+            query.get(comment.id, {
+                success: function (object) {
+                    // The object was retrieved successfully.
+                    object.destroy({
+                        success: function (myObject) {
+                            // The object was deleted from the Parse Cloud.
+                            $timeout(function () {
+                                comments.splice(comKey, 1);
+                                console.log("delete comment", myObject)
+                            }, 10)
+                        },
+                        error: function (myObject, error) {
+                            console.log("errorcomment", myObject)
+                            // The delete failed.
+                            // error is a Parse.Error with an error code and message.
+                        }
+                    })
+                },
+                error: function (object, error) {
+                    console.log("object not found");
+                    // The object was not retrieved successfully.
+                    // error is a Parse.Error with an error code and message.
+                }
+            });
+        }
 
     }
 

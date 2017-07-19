@@ -5,7 +5,7 @@
             <p class="gray">You can ask queries on subject specific pages for Common, ECE and EE</p>
 		</div>
         <div class="panel-body post" ng-repeat="(postKey, post) in newFeeds.posts | reverse">
-            <div class="row subject-title">{{post.attributes.subject.attributes.name}}</div>
+            <div class="row subject-title">{{post.attributes.subject.attributes.name}}<a ng-if="newFeeds.user.attributes.username == 'admin'" style="color:white" ng-click="newFeeds.deletePost(postKey,post)" class="right">Delete</a></div>
             <div class="row" style="background-color: white">
                 <div class="post-user-img">
                     <img src='img/avatar_dummy.png' alt="Profile Picture" class="img-responsive img-rounded img-post-profile">

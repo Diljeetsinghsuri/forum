@@ -168,5 +168,69 @@ function newFeedsCtrl($timeout, $uibModal, dataService) {
         }
 
     }
+    newFeeds.deletePost = function (postKey, post) {
+        if (confirm("Are you sure you want to delete this POST ?")) {
+            if (post.comments.length > 0) {
+                for (var i = 0; i < post.comments.length; i++) {
+                    var Comment = Parse.Object.extend("Comment");
+                    var query = new Parse.Query(Comment);
+                    query.get( post.comments[i].id, {
+                        success: function (object) {
+                            // The object was retrieved successfully.
+                            object.destroy({
+                                success: function (myObject) {
+                                    // The object was deleted from the Parse Cloud.
+                                    $timeout(function () {
+                                        console.log("delete comment", myObject)
+                                    }, 10)
+                                },
+                                error: function (myObject, error) {
+                                    console.log("errorcomment", myObject)
+                                    // The delete failed.
+                                    // error is a Parse.Error with an error code and message.
+                                }
+                            })
+                        },
+                        error: function (object, error) {
+                            console.log("object not found");
+                            // The object was not retrieved successfully.
+                            // error is a Parse.Error with an error code and message.
+                        }
+                    });
+                }
+            }
+            var Post = Parse.Object.extend("Post");
+            var query = new Parse.Query(Post);
+            query.get(post.id, {
+                success: function (object) {
+                    // The object was retrieved successfully.
+                    object.destroy({
+                        success: function (myObject) {
+                            // The object was deleted from the Parse Cloud.
+                             newFeeds.posts.splice(newFeeds.posts.indexOf(post), 1);
+                            $timeout(function () {
+                                console.log(postKey)
+                                console.log(newFeeds.posts)
+                               
+                                console.log(newFeeds.posts)
+                                console.log("delete comment", myObject)
+                            }, 100)
+                        },
+                        error: function (myObject, error) {
+                            console.log("errorcomment", myObject)
+                            // The delete failed.
+                            // error is a Parse.Error with an error code and message.
+                        }
+                    })
+                },
+                error: function (object, error) {
+                    console.log("object not found");
+                    // The object was not retrieved successfully.
+                    // error is a Parse.Error with an error code and message.
+                }
+            });
+        }
+
+    }
 
 }

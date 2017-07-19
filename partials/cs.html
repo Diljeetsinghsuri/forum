@@ -11,10 +11,12 @@
 			<div class="panel-body attach-body" ng-if="data.disAttach.length">
 				<table class="table table-responsive">
 					<tr>
+						<th ng-if="data.user.attributes.username == 'admin'"></th>
 						<th>Filename</th>
 						<th>&nbsp;</th>
 					</tr>
 					<tr ng-repeat="attach in data.disAttach">
+						<td ng-if="data.user.attributes.username == 'admin'"><span class="glyphicon glyphicon-remove" ng-click="data.removeAttach(attach)"></span></td>
 						<td>{{attach.attributes.name}}</td>
 						<td><a ng-href="{{attach.attributes.file._url}}">Download</a></td>
 					</tr>
@@ -55,7 +57,7 @@
 				There is no query posted yet
 			</div>
 		</div>
-		<div class="panel-body post" ng-repeat="post in data.disPost | reverse" ng-if="data.disPost.length">
+		<div class="panel-body post" ng-repeat="post in data.disPost | reverse" ng-if="data.disPost.length"><div class="row" style="padding-right:16px" ng-if="data.user.attributes.username == 'admin'"><a ng-click="data.deletePost(postKey,post)" class="right">Delete</a></div>
 			<div class="row" style="background-color: white">
 				<div class="post-user-img">
 					<img src='img/avatar_dummy.png' alt="Profile Picture" class="img-responsive img-rounded img-post-profile margin-auto">

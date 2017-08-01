@@ -48,11 +48,14 @@ function adminCtrl($timeout, $uibModal) {
                         for (var i = 0; i < admin.newPosts.length; i++) {
                             for (var j = 0; j < admin.usersList.length; j++) {
                                 //console.log(admin.newPosts[i].get("user"));
-                                if (admin.newPosts[i].get("user").id === admin.usersList[j].get("user").id) {
+                                if(admin.newPosts[i].get("user") != undefined && admin.usersList[j].get("user") != undefined )
+                                {
+                                    if (admin.newPosts[i].get("user").id === admin.usersList[j].get("user").id) {
                                     admin.newPosts[i].email = admin.usersList[j].get("email");
-                                    console.log("found email",admin.usersList[j].get("email"));
-                                    console.log(admin.newPosts[i].get("likes"))
+                                    // console.log("found email",admin.usersList[j].get("email"));
+                                    // console.log(admin.newPosts[i].get("likes"))
                                 }
+                            }
                             }
                         }
                         $timeout(function(){console.log(admin.newPosts)},10)

@@ -12,8 +12,9 @@ function navCtrl($rootScope, $location, $timeout, dataService) {
     nav.subCom = [];
     if (Parse.User.current()) {
         $timeout(function () {
+            console.log('userupdated');
             $rootScope.currentUser = Parse.User.current().toJSON();
-        }, 20);
+        }, 200);
     }
     console.log(nav.currentUser);
     //$rootScope.aboutUs = true;

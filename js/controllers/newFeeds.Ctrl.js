@@ -1,10 +1,16 @@
 angular.module("forum").controller("newFeedsCtrl", newFeedsCtrl)
 
-function newFeedsCtrl($timeout, $uibModal, dataService) {
+function newFeedsCtrl($timeout, $uibModal, dataService, $rootScope) {
     var newFeeds = this;
     newFeeds.user = dataService.currUser;
     newFeeds.posts = [];
     newFeeds.comments = [1, 2];
+    if (Parse.User.current()) {
+        $timeout(function () {
+            console.log('user in home');
+            $rootScope.currentUser = Parse.User.current().toJSON();
+        }, 200);
+    }
     newFeeds.getData = function (num) {
 
         var Post = Parse.Object.extend("Post");

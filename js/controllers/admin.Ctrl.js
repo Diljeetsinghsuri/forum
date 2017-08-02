@@ -3,7 +3,7 @@
  */
 angular.module("forum").controller("adminCtrl",adminCtrl)
 
-function adminCtrl($timeout, $uibModal) {
+function adminCtrl($timeout, $uibModal, $rootScope) {
     console.log("admin is working");
     var admin =this ;
     admin.divId = [];
@@ -14,6 +14,12 @@ function adminCtrl($timeout, $uibModal) {
     admin.loadId = false;
     var Subject = Parse.Object.extend("Subject");
     var query = new Parse.Query(Subject);
+    if (Parse.User.current()) {
+        $timeout(function () {
+            console.log('user in home');
+            $rootScope.currentUser = Parse.User.current().toJSON();
+        }, 200);
+    }
     query.find({
         success: function(results) {
             $timeout(function () {

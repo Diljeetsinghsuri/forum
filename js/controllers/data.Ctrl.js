@@ -16,6 +16,12 @@ function dataCtrl($rootScope, $routeParams, dataService, $timeout, $uibModal) {
     data.menuName = dataService.currSub.toJSON().name;
     console.log(data.menuName);
     console.log($routeParams.id);
+    if (Parse.User.current()) {
+        $timeout(function () {
+            console.log('user in home');
+            $rootScope.currentUser = Parse.User.current().toJSON();
+        }, 200);
+    }
 
     /*retrieving attachments */
     var Attachment = Parse.Object.extend("Attachment");

@@ -11,6 +11,7 @@ function homeCtrl(dataService, $localForage, $routeParams, $timeout, $uibModal, 
     console.log(Parse.User.current());
     if (Parse.User.current()) {
         $timeout(function () {
+            console.log('user in home');
             $rootScope.currentUser = Parse.User.current().toJSON();
         }, 200);
     }
